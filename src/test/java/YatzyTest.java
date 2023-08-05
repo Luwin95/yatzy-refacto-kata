@@ -1,6 +1,5 @@
 import dice.exceptions.UnconsistentDiceResult;
 import org.junit.*;
-import score.severalOfAKind.FourOfAKindScore;
 import utils.DiceResultDataSet;
 
 import static org.junit.Assert.*;
@@ -700,19 +699,128 @@ public class YatzyTest {
         );
     }
 
+    // Small straight score
 
+    /**
+     * Given 1, 2, 3, 4, 5 dices results
+     * When calculating small straight result
+     * Then return 15
+     * @throws UnconsistentDiceResult thrown if the created dice result is not between 1 and
+     */
     @Test
-    public void smallStraight() {
-        assertEquals(15, Yatzy.smallStraight(1,2,3,4,5));
-        assertEquals(15, Yatzy.smallStraight(2,3,4,5,1));
-        assertEquals(0, Yatzy.smallStraight(1,2,2,4,5));
+    public void givenOneTwoThreeFourFiveDicesResults_whenSmallStraight_ThenReturnFifteen() throws UnconsistentDiceResult {
+        assertEquals(
+            15,
+            Yatzy.smallStraight(
+                DiceResultDataSet.one(),
+                DiceResultDataSet.two(),
+                DiceResultDataSet.three(),
+                DiceResultDataSet.four(),
+                DiceResultDataSet.five()
+            )
+        );
     }
 
+    /**
+     * Given 2, 3, 4, 5, 1 dices results
+     * When calculating small straight result
+     * Then return 15
+     * @throws UnconsistentDiceResult thrown if the created dice result is not between 1 and
+     */
     @Test
-    public void largeStraight() {
-        assertEquals(20, Yatzy.largeStraight(6,2,3,4,5));
-        assertEquals(20, Yatzy.largeStraight(2,3,4,5,6));
-        assertEquals(0, Yatzy.largeStraight(1,2,2,4,5));
+    public void givenTwoThreeFourFiveOneDicesResults_whenSmallStraight_ThenReturnFifteen() throws UnconsistentDiceResult {
+        assertEquals(
+            15,
+            Yatzy.smallStraight(
+                DiceResultDataSet.two(),
+                DiceResultDataSet.three(),
+                DiceResultDataSet.four(),
+                DiceResultDataSet.five(),
+                DiceResultDataSet.one()
+            )
+        );
+    }
+
+    /**
+     * Given 1, 2, 2, 4, 5 dices results
+     * When calculating small straight result
+     * Then return 0
+     * @throws UnconsistentDiceResult thrown if the created dice result is not between 1 and
+     */
+    @Test
+    public void givenOneTwoTwoFourFiveDicesResults_whenSmallStraight_ThenReturnZero() throws UnconsistentDiceResult {
+        assertEquals(
+            0,
+            Yatzy.smallStraight(
+                DiceResultDataSet.one(),
+                DiceResultDataSet.two(),
+                DiceResultDataSet.two(),
+                DiceResultDataSet.four(),
+                DiceResultDataSet.five()
+            )
+        );
+    }
+
+    // Large Straight score
+
+    /**
+     * Given 6, 2, 3, 4, 5 dices results
+     * When calculating large straight result
+     * Then return 20
+     * @throws UnconsistentDiceResult thrown if the created dice result is not between 1 and
+     */
+    @Test
+    public void givenSixTwoThreeFourFiveDicesResults_whenLargeStraight_ThenReturnTwenty() throws UnconsistentDiceResult {
+        assertEquals(
+            20,
+            Yatzy.largeStraight(
+                DiceResultDataSet.six(),
+                DiceResultDataSet.two(),
+                DiceResultDataSet.three(),
+                DiceResultDataSet.four(),
+                DiceResultDataSet.five()
+            )
+        );
+    }
+
+    /**
+     * Given 2, 3, 4, 5, 6 dices results
+     * When calculating large straight result
+     * Then return 20
+     * @throws UnconsistentDiceResult thrown if the created dice result is not between 1 and
+     */
+    @Test
+    public void givenTwoThreeFourFiveSixDicesResults_whenLargeStraight_ThenReturnTwenty() throws UnconsistentDiceResult {
+        assertEquals(
+            20,
+            Yatzy.largeStraight(
+                DiceResultDataSet.two(),
+                DiceResultDataSet.three(),
+                DiceResultDataSet.four(),
+                DiceResultDataSet.five(),
+                DiceResultDataSet.six()
+            )
+        );
+    }
+
+    /**
+     * Given 1, 2, 2, 4, 5, 6 dices results
+     * When calculating large straight result
+     * Then return 0
+     * @throws UnconsistentDiceResult thrown if the created dice result is not between 1 and
+     */
+    @Test
+    public void givenOneTwoTwoFourFiveDicesResults_whenLargeStraight_ThenReturnZero() throws UnconsistentDiceResult {
+        assertEquals(
+            0,
+            Yatzy.largeStraight(
+                DiceResultDataSet.one(),
+                DiceResultDataSet.two(),
+                DiceResultDataSet.two(),
+                DiceResultDataSet.four(),
+                DiceResultDataSet.five()
+            )
+        );
     }
 
     @Test

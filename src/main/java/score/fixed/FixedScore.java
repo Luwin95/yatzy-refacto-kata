@@ -1,6 +1,7 @@
-package score;
+package score.fixed;
 
 import dice.DiceResult;
+import score.AbstractScore;
 
 public abstract class FixedScore extends AbstractScore {
     protected final int score;
@@ -9,5 +10,6 @@ public abstract class FixedScore extends AbstractScore {
         super(firstDiceResult, secondDiceResult, thirdDiceResult, fourthDiceResult, fifthDiceResult);
         this.score = score;
     }
+
 
 }

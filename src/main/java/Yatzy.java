@@ -1,7 +1,9 @@
 import dice.DiceResult;
 import score.ChanceScore;
-import score.YatzyScore;
+import score.fixed.YatzyScore;
 import score.face.*;
+import score.fixed.straight.LargeStraightScore;
+import score.fixed.straight.SmallStraightScore;
 import score.severalOfAKind.FourOfAKindScore;
 import score.severalOfAKind.PairScore;
 import score.severalOfAKind.ThreeOfAKindScore;
@@ -68,40 +70,14 @@ public class Yatzy {
         return new FourOfAKindScore(firstDiceResult, secondDiceResult, thirdDiceResult, fourthDiceResult, fifthDiceResult).calculateScore();
     }
 
-    public static int smallStraight(int d1, int d2, int d3, int d4, int d5)
+    public static int smallStraight(DiceResult firstDiceResult, DiceResult secondDiceResult, DiceResult thirdDiceResult, DiceResult fourthDiceResult, DiceResult fifthDiceResult)
     {
-        int[] tallies;
-        tallies = new int[6];
-        tallies[d1-1] += 1;
-        tallies[d2-1] += 1;
-        tallies[d3-1] += 1;
-        tallies[d4-1] += 1;
-        tallies[d5-1] += 1;
-        if (tallies[0] == 1 &&
-            tallies[1] == 1 &&
-            tallies[2] == 1 &&
-            tallies[3] == 1 &&
-            tallies[4] == 1)
-            return 15;
-        return 0;
+        return new SmallStraightScore(firstDiceResult, secondDiceResult, thirdDiceResult, fourthDiceResult, fifthDiceResult).calculateScore();
     }
 
-    public static int largeStraight(int d1, int d2, int d3, int d4, int d5)
+    public static int largeStraight(DiceResult firstDiceResult, DiceResult secondDiceResult, DiceResult thirdDiceResult, DiceResult fourthDiceResult, DiceResult fifthDiceResult)
     {
-        int[] tallies;
-        tallies = new int[6];
-        tallies[d1-1] += 1;
-        tallies[d2-1] += 1;
-        tallies[d3-1] += 1;
-        tallies[d4-1] += 1;
-        tallies[d5-1] += 1;
-        if (tallies[1] == 1 &&
-            tallies[2] == 1 &&
-            tallies[3] == 1 &&
-            tallies[4] == 1
-            && tallies[5] == 1)
-            return 20;
-        return 0;
+        return new LargeStraightScore(firstDiceResult, secondDiceResult, thirdDiceResult, fourthDiceResult, fifthDiceResult).calculateScore();
     }
 
     public static int fullHouse(int d1, int d2, int d3, int d4, int d5)

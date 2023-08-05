@@ -1,7 +1,8 @@
-package score;
+package score.fixed;
 
 import dice.exceptions.UnconsistentDiceResult;
 import org.junit.Test;
+import score.fixed.YatzyScore;
 import utils.DiceResultDataSet;
 
 import static org.junit.Assert.assertEquals;
