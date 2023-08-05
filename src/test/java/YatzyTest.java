@@ -339,11 +339,69 @@ public class YatzyTest {
         );
     }
 
+    // Fives score
+
+    /**
+     * Given 4, 4, 4, 5, 5 dices results
+     * When calculating fives result
+     * Then return 10
+     *
+     * @throws UnconsistentDiceResult thrown if the created dice result is not between 1 and
+     */
     @Test
-    public void fives() {
-        assertEquals(10, new Yatzy(4,4,4,5,5).fives());
-        assertEquals(15, new Yatzy(4,4,5,5,5).fives());
-        assertEquals(20, new Yatzy(4,5,5,5,5).fives());
+    public void givenFourFourFourFiveFiveDicesResults_whenFives_ThenReturnTen() throws UnconsistentDiceResult {
+        assertEquals(
+            10,
+            Yatzy.fives(
+                DiceResultDataSet.four(),
+                DiceResultDataSet.four(),
+                DiceResultDataSet.four(),
+                DiceResultDataSet.five(),
+                DiceResultDataSet.five()
+            )
+        );
+    }
+
+    /**
+     * Given 4, 4, 5, 5, 5 dices results
+     * When calculating fives result
+     * Then return 15
+     *
+     * @throws UnconsistentDiceResult thrown if the created dice result is not between 1 and
+     */
+    @Test
+    public void givenFourFourFiveFiveFiveDicesResults_whenFives_ThenReturnFifteen() throws UnconsistentDiceResult {
+        assertEquals(
+            15,
+            Yatzy.fives(
+                DiceResultDataSet.four(),
+                DiceResultDataSet.four(),
+                DiceResultDataSet.five(),
+                DiceResultDataSet.five(),
+                DiceResultDataSet.five()
+            )
+        );
+    }
+
+    /**
+     * Given 4, 5, 5, 5, 5 dices results
+     * When calculating fives result
+     * Then return 20
+     *
+     * @throws UnconsistentDiceResult thrown if the created dice result is not between 1 and
+     */
+    @Test
+    public void givenFourFiveFiveFiveFiveDicesResults_whenFives_ThenReturnTwenty() throws UnconsistentDiceResult {
+        assertEquals(
+            20,
+            Yatzy.fives(
+                DiceResultDataSet.four(),
+                DiceResultDataSet.five(),
+                DiceResultDataSet.five(),
+                DiceResultDataSet.five(),
+                DiceResultDataSet.five()
+            )
+        );
     }
 
     @Test
