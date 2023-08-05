@@ -3,7 +3,7 @@ package dice;
 import dice.exceptions.UnconsistentDiceResult;
 
 public class DiceResult {
-    private int result;
+    private final int result;
     private static final int DICE_MIN_RESULT = 1;
     private static final int DICE_MAX_RESULT = 6;
 
