@@ -1,14 +1,38 @@
+import dice.exceptions.UnconsistentDiceResult;
 import org.junit.*;
+import score.ChanceScore;
+import utils.DiceResultDataSet;
+
 import static org.junit.Assert.*;
 
 public class YatzyTest {
 
     @Test
-    public void chance_scores_sum_of_all_dice() {
-        int expected = 15;
-        int actual = Yatzy.chance(2,3,4,5,1);
-        assertEquals(expected, actual);
-        assertEquals(16, Yatzy.chance(3,3,4,5,1));
+    public void givenTwoThreeFourFiveAndOneDicesResults_whenChance_ThenReturnFifteen() throws UnconsistentDiceResult {
+        assertEquals(
+            15,
+            Yatzy.chance(
+                DiceResultDataSet.two(),
+                DiceResultDataSet.three(),
+                DiceResultDataSet.four(),
+                DiceResultDataSet.five(),
+                DiceResultDataSet.one()
+            )
+        );
+    }
+
+    @Test
+    public void givenThreeThreeFourFiveAndOneDicesResults_whenCalculateChanceScore_ThenReturnSixteen() throws UnconsistentDiceResult {
+        assertEquals(
+            16,
+            Yatzy.chance(
+                DiceResultDataSet.three(),
+                DiceResultDataSet.three(),
+                DiceResultDataSet.four(),
+                DiceResultDataSet.five(),
+                DiceResultDataSet.one()
+            )
+        );
     }
 
     @Test public void yatzy_scores_50() {
