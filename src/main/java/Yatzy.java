@@ -2,6 +2,7 @@ import dice.DiceResult;
 import score.ChanceScore;
 import score.YatzyScore;
 import score.face.OnesScore;
+import score.face.TwosScore;
 
 public class Yatzy {
 
@@ -19,14 +20,8 @@ public class Yatzy {
         return new OnesScore(firstDiceResult, secondDiceResult, thirdDiceResult, fourthDiceResult, fifthDiceResult).calculateScore();
     }
 
-    public static int twos(int d1, int d2, int d3, int d4, int d5) {
-        int sum = 0;
-        if (d1 == 2) sum += 2;
-        if (d2 == 2) sum += 2;
-        if (d3 == 2) sum += 2;
-        if (d4 == 2) sum += 2;
-        if (d5 == 2) sum += 2;
-        return sum;
+    public static int twos(DiceResult firstDiceResult, DiceResult secondDiceResult, DiceResult thirdDiceResult, DiceResult fourthDiceResult, DiceResult fifthDiceResult) {
+        return new TwosScore(firstDiceResult, secondDiceResult, thirdDiceResult, fourthDiceResult, fifthDiceResult).calculateScore();
     }
 
     public static int threes(int d1, int d2, int d3, int d4, int d5) {

@@ -1,11 +1,12 @@
 import dice.exceptions.UnconsistentDiceResult;
 import org.junit.*;
-import score.face.OnesScore;
 import utils.DiceResultDataSet;
 
 import static org.junit.Assert.*;
 
 public class YatzyTest {
+
+    // Chance Score
 
     /**
      * Given 2, 3, 4, 5, 1 dices results
@@ -26,6 +27,8 @@ public class YatzyTest {
             )
         );
     }
+
+    // Yatzy Score
 
     /**
      * Given 3, 3, 4, 5, 1 dices results
@@ -107,6 +110,8 @@ public class YatzyTest {
         );
     }
 
+    // Ones Score
+
     /**
      * Given 1, 2, 3, 4, 5 dices results
      * When calculating ones result
@@ -187,11 +192,48 @@ public class YatzyTest {
         );
     }
 
+    // Twos Score
+
+    /**
+     * Given 1, 2, 3, 2, 6 dices results
+     * When calculating chance result
+     * Then return 4
+     * @throws UnconsistentDiceResult thrown if the created dice result is not between 1 and
+     */
     @Test
-    public void test_2s() {
-        assertEquals(4, Yatzy.twos(1,2,3,2,6));
-        assertEquals(10, Yatzy.twos(2,2,2,2,2));
+    public void givenOneTwoThreeTwoSixDicesResults_whenTwos_ThenReturnFour() throws UnconsistentDiceResult {
+        assertEquals(
+            4,
+            Yatzy.twos(
+                DiceResultDataSet.one(),
+                DiceResultDataSet.two(),
+                DiceResultDataSet.three(),
+                DiceResultDataSet.two(),
+                DiceResultDataSet.six()
+            )
+        );
     }
+
+    /**
+     * Given 1, 2, 3, 2, 6 dices results
+     * When calculating chance result
+     * Then return 4
+     * @throws UnconsistentDiceResult thrown if the created dice result is not between 1 and
+     */
+    @Test
+    public void givenFiveTwosDicesResults_Twos_ThenReturnTen() throws UnconsistentDiceResult {
+        assertEquals(
+            10,
+            Yatzy.twos(
+                DiceResultDataSet.two(),
+                DiceResultDataSet.two(),
+                DiceResultDataSet.two(),
+                DiceResultDataSet.two(),
+                DiceResultDataSet.two()
+            )
+        );
+    }
+
 
     @Test
     public void test_threes() {
