@@ -575,19 +575,73 @@ public class YatzyTest {
         );
     }
 
+    // Three of a kind score
+
+    /**
+     * Given 3, 3, 3, 4, 5 dices results
+     * When calculating three of a kind result
+     * Then return 9
+     * @throws UnconsistentDiceResult thrown if the created dice result is not between 1 and
+     */
     @Test
-    public void three_of_a_kind() 
-    {
-        assertEquals(9, Yatzy.three_of_a_kind(3,3,3,4,5));
-        assertEquals(15, Yatzy.three_of_a_kind(5,3,5,4,5));
-        assertEquals(9, Yatzy.three_of_a_kind(3,3,3,3,5));
+    public void givenThreeThreeThreeFourFiveDicesResults_whenThreeOfAKind_ThenReturnNine() throws UnconsistentDiceResult {
+        assertEquals(
+            9,
+            Yatzy.threeOfAKind(
+                DiceResultDataSet.three(),
+                DiceResultDataSet.three(),
+                DiceResultDataSet.three(),
+                DiceResultDataSet.four(),
+                DiceResultDataSet.five()
+            )
+        );
+    }
+
+    /**
+     * Given 5, 3, 5, 4, 5 dices results
+     * When calculating three of a kind result
+     * Then return 15
+     * @throws UnconsistentDiceResult thrown if the created dice result is not between 1 and
+     */
+    @Test
+    public void givenFiveThreeFiveFourFiveDicesResults_whenThreeOfAKind_ThenReturnFifteen() throws UnconsistentDiceResult {
+        assertEquals(
+            15,
+            Yatzy.threeOfAKind(
+                DiceResultDataSet.five(),
+                DiceResultDataSet.three(),
+                DiceResultDataSet.five(),
+                DiceResultDataSet.four(),
+                DiceResultDataSet.five()
+            )
+        );
+    }
+
+    /**
+     * Given 3, 3, 3, 3, 5 dices results
+     * When calculating three of a kind result
+     * Then return 9
+     * @throws UnconsistentDiceResult thrown if the created dice result is not between 1 and
+     */
+    @Test
+    public void givenThreeThreeThreeThreeFiveDicesResults_whenCalculateThreeOfAKindScore_ThenReturnNine() throws UnconsistentDiceResult {
+        assertEquals(
+            9,
+            Yatzy.threeOfAKind(
+                DiceResultDataSet.three(),
+                DiceResultDataSet.three(),
+                DiceResultDataSet.three(),
+                DiceResultDataSet.three(),
+                DiceResultDataSet.five()
+            )
+        );
     }
 
     @Test
     public void four_of_a_knd() {
         assertEquals(12, Yatzy.four_of_a_kind(3,3,3,3,5));
         assertEquals(20, Yatzy.four_of_a_kind(5,5,5,4,5));
-        assertEquals(9, Yatzy.three_of_a_kind(3,3,3,3,3));
+        assertEquals(12, Yatzy.four_of_a_kind(3,3,3,3,3));
     }
 
     @Test

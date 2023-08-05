@@ -3,6 +3,7 @@ import score.ChanceScore;
 import score.YatzyScore;
 import score.face.*;
 import score.severalOfAKind.PairScore;
+import score.severalOfAKind.ThreeOfAKindScore;
 import score.severalOfAKind.TwoPairsScore;
 
 
@@ -55,6 +56,12 @@ public class Yatzy {
             return new TwoPairsScore(firstDiceResult, secondDiceResult, thirdDiceResult, fourthDiceResult, fifthDiceResult).calculateScore();
     }
 
+    public static int threeOfAKind(DiceResult firstDiceResult, DiceResult secondDiceResult, DiceResult thirdDiceResult, DiceResult fourthDiceResult, DiceResult fifthDiceResult)
+    {
+        return new ThreeOfAKindScore(firstDiceResult, secondDiceResult, thirdDiceResult, fourthDiceResult, fifthDiceResult).calculateScore();
+    }
+
+
     public static int four_of_a_kind(int _1, int _2, int d3, int d4, int d5)
     {
         int[] tallies;
@@ -67,21 +74,6 @@ public class Yatzy {
         for (int i = 0; i < 6; i++)
             if (tallies[i] >= 4)
                 return (i+1) * 4;
-        return 0;
-    }
-
-    public static int three_of_a_kind(int d1, int d2, int d3, int d4, int d5)
-    {
-        int[] t;
-        t = new int[6];
-        t[d1-1]++;
-        t[d2-1]++;
-        t[d3-1]++;
-        t[d4-1]++;
-        t[d5-1]++;
-        for (int i = 0; i < 6; i++)
-            if (t[i] >= 3)
-                return (i+1) * 3;
         return 0;
     }
 
