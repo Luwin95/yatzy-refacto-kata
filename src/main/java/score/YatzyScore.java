@@ -10,7 +10,7 @@ abstract class YatzyScore {
     /**
      * The list of the diceResults launched during Yatzy game, limited to 5 results
      */
-    protected List<DiceResult> diceResults = Arrays.asList(new DiceResult[5]);
+    protected List<DiceResult> diceResults;
 
     /**
      * The score of a Yatzy game is calculated with 5 dices results (between 1 and 6)
@@ -21,7 +21,7 @@ abstract class YatzyScore {
      * @param fifthDiceResult the result of the fifth dice
      */
     public YatzyScore(DiceResult firstDiceResult, DiceResult secondDiceResult, DiceResult thirdDiceResult, DiceResult fourthDiceResult, DiceResult fifthDiceResult) {
-        Collections.addAll(this.diceResults, firstDiceResult, secondDiceResult, thirdDiceResult, fourthDiceResult, fifthDiceResult);
+        this.diceResults = Arrays.asList(firstDiceResult, secondDiceResult, thirdDiceResult, fourthDiceResult, fifthDiceResult);
     }
 
     abstract Integer calculateScore();
