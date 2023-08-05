@@ -1,6 +1,5 @@
 import dice.exceptions.UnconsistentDiceResult;
 import org.junit.*;
-import score.ChanceScore;
 import utils.DiceResultDataSet;
 
 import static org.junit.Assert.*;
@@ -34,7 +33,7 @@ public class YatzyTest {
      * @throws UnconsistentDiceResult thrown id the created dice result is not between 1 and
      */
     @Test
-    public void givenThreeThreeFourFiveAndOneDicesResults_whenCalculateChanceScore_ThenReturnSixteen() throws UnconsistentDiceResult {
+    public void givenThreeThreeFourFiveAndOneDicesResults_whenChance_ThenReturnSixteen() throws UnconsistentDiceResult {
         assertEquals(
             16,
             Yatzy.chance(
@@ -47,12 +46,64 @@ public class YatzyTest {
         );
     }
 
-    @Test public void yatzy_scores_50() {
-        int expected = 50;
-        int actual = Yatzy.yatzy(4,4,4,4,4);
-        assertEquals(expected, actual);
-        assertEquals(50, Yatzy.yatzy(6,6,6,6,6));
-        assertEquals(0, Yatzy.yatzy(6,6,6,6,3));
+    /**
+     * Given 4, 4, 4, 4, 4 dices results
+     * When calculating yatzy result
+     * Then return 50
+     * @throws UnconsistentDiceResult thrown if the created dice result is not between 1 and
+     */
+    @Test
+    public void givenOnlyFoursDicesResults_whenYatzy_ThenReturnFifty() throws UnconsistentDiceResult {
+        assertEquals(
+            50,
+            Yatzy.yatzy(
+                DiceResultDataSet.four(),
+                DiceResultDataSet.four(),
+                DiceResultDataSet.four(),
+                DiceResultDataSet.four(),
+                DiceResultDataSet.four()
+            )
+        );
+    }
+
+    /**
+     * Given 6, 6, 6, 6, 6 dices results
+     * When calculating yatzy result
+     * Then return 50
+     * @throws UnconsistentDiceResult thrown if the created dice result is not between 1 and
+     */
+    @Test
+    public void givenOnlySixesDicesResults_whenYatzy_ThenReturnFifty() throws UnconsistentDiceResult {
+        assertEquals(
+            50,
+            Yatzy.yatzy(
+                DiceResultDataSet.six(),
+                DiceResultDataSet.six(),
+                DiceResultDataSet.six(),
+                DiceResultDataSet.six(),
+                DiceResultDataSet.six()
+            )
+        );
+    }
+
+    /**
+     * Given 6, 6, 6, 6, 3 dices results
+     * When calculating yatzy result
+     * Then return 0
+     * @throws UnconsistentDiceResult thrown if the created dice result is not between 1 and
+     */
+    @Test
+    public void givenFourSixesAndAThreeDicesResults_whenYatzy_ThenReturnZero() throws UnconsistentDiceResult {
+        assertEquals(
+            0,
+            Yatzy.yatzy(
+                DiceResultDataSet.six(),
+                DiceResultDataSet.six(),
+                DiceResultDataSet.six(),
+                DiceResultDataSet.six(),
+                DiceResultDataSet.three()
+            )
+        );
     }
 
     @Test public void test_1s() {

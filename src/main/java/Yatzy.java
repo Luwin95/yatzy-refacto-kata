@@ -1,5 +1,6 @@
 import dice.DiceResult;
 import score.ChanceScore;
+import score.YatzyScore;
 
 public class Yatzy {
 
@@ -8,15 +9,9 @@ public class Yatzy {
         return new ChanceScore(firstDiceResult, secondDiceResult, thirdDiceResult, fourthDiceResult, fifthDiceResult).calculateScore();
     }
 
-    public static int yatzy(int... dice)
+    public static int yatzy(DiceResult firstDiceResult, DiceResult secondDiceResult, DiceResult thirdDiceResult, DiceResult fourthDiceResult, DiceResult fifthDiceResult)
     {
-        int[] counts = new int[6];
-        for (int die : dice)
-            counts[die-1]++;
-        for (int i = 0; i != 6; i++)
-            if (counts[i] == 5)
-                return 50;
-        return 0;
+        return new YatzyScore(firstDiceResult, secondDiceResult, thirdDiceResult, fourthDiceResult, fifthDiceResult).calculateScore();
     }
 
     public static int ones(int d1, int d2, int d3, int d4, int d5) {
