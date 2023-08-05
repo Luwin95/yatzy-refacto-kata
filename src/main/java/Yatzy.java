@@ -2,6 +2,7 @@ import dice.DiceResult;
 import score.ChanceScore;
 import score.YatzyScore;
 import score.face.*;
+import score.severalOfAKind.FourOfAKindScore;
 import score.severalOfAKind.PairScore;
 import score.severalOfAKind.ThreeOfAKindScore;
 import score.severalOfAKind.TwoPairsScore;
@@ -62,19 +63,9 @@ public class Yatzy {
     }
 
 
-    public static int four_of_a_kind(int _1, int _2, int d3, int d4, int d5)
+    public static int fourOfAKind(DiceResult firstDiceResult, DiceResult secondDiceResult, DiceResult thirdDiceResult, DiceResult fourthDiceResult, DiceResult fifthDiceResult)
     {
-        int[] tallies;
-        tallies = new int[6];
-        tallies[_1-1]++;
-        tallies[_2-1]++;
-        tallies[d3-1]++;
-        tallies[d4-1]++;
-        tallies[d5-1]++;
-        for (int i = 0; i < 6; i++)
-            if (tallies[i] >= 4)
-                return (i+1) * 4;
-        return 0;
+        return new FourOfAKindScore(firstDiceResult, secondDiceResult, thirdDiceResult, fourthDiceResult, fifthDiceResult).calculateScore();
     }
 
     public static int smallStraight(int d1, int d2, int d3, int d4, int d5)

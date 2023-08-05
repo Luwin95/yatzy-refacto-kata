@@ -1,5 +1,6 @@
 import dice.exceptions.UnconsistentDiceResult;
 import org.junit.*;
+import score.severalOfAKind.FourOfAKindScore;
 import utils.DiceResultDataSet;
 
 import static org.junit.Assert.*;
@@ -637,12 +638,68 @@ public class YatzyTest {
         );
     }
 
+    // Four of a kind score
+
+    /**
+     * Given 3, 3, 3, 3, 5 dices results
+     * When calculating four of a kind result
+     * Then return 12
+     * @throws UnconsistentDiceResult thrown if the created dice result is not between 1 and
+     */
     @Test
-    public void four_of_a_knd() {
-        assertEquals(12, Yatzy.four_of_a_kind(3,3,3,3,5));
-        assertEquals(20, Yatzy.four_of_a_kind(5,5,5,4,5));
-        assertEquals(12, Yatzy.four_of_a_kind(3,3,3,3,3));
+    public void givenThreeThreeThreeThreeFiveDicesResults_whenFourOfAKind_ThenReturnTwelve() throws UnconsistentDiceResult {
+        assertEquals(
+            12,
+            Yatzy.fourOfAKind(
+                DiceResultDataSet.three(),
+                DiceResultDataSet.three(),
+                DiceResultDataSet.three(),
+                DiceResultDataSet.three(),
+                DiceResultDataSet.five()
+            )
+        );
     }
+
+    /**
+     * Given 5, 5, 5, 4, 5 dices results
+     * When calculating four of a kind result
+     * Then return 20
+     * @throws UnconsistentDiceResult thrown if the created dice result is not between 1 and
+     */
+    @Test
+    public void givenFiveFiveFiveFourFiveDicesResults_whenFourOfAKind_ThenReturnTwenty() throws UnconsistentDiceResult {
+        assertEquals(
+            20,
+            Yatzy.fourOfAKind(
+                DiceResultDataSet.five(),
+                DiceResultDataSet.five(),
+                DiceResultDataSet.five(),
+                DiceResultDataSet.four(),
+                DiceResultDataSet.five()
+            )
+        );
+    }
+
+    /**
+     * Given 3, 3, 3, 3, 3 dices results
+     * When calculating four of a kind result
+     * Then return 20
+     * @throws UnconsistentDiceResult thrown if the created dice result is not between 1 and
+     */
+    @Test
+    public void givenOnlyThreesDicesResults_whenFourOfAKind_ThenReturnTwelve() throws UnconsistentDiceResult {
+        assertEquals(
+            12,
+            Yatzy.fourOfAKind(
+                DiceResultDataSet.three(),
+                DiceResultDataSet.three(),
+                DiceResultDataSet.three(),
+                DiceResultDataSet.three(),
+                DiceResultDataSet.three()
+            )
+        );
+    }
+
 
     @Test
     public void smallStraight() {
