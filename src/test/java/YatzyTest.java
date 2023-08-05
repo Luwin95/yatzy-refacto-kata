@@ -1,6 +1,5 @@
 import dice.exceptions.UnconsistentDiceResult;
 import org.junit.*;
-import score.face.SixesScore;
 import utils.DiceResultDataSet;
 
 import static org.junit.Assert.*;
@@ -471,17 +470,109 @@ public class YatzyTest {
 
     }
 
+    // Pair score
+
+    /**
+     * Given 3, 4, 3, 5, 6 dices results
+     * When calculating pair result
+     * Then return 6
+     * @throws UnconsistentDiceResult thrown if the created dice result is not between 1 and
+     */
     @Test
-    public void one_pair() {
-        assertEquals(6, Yatzy.score_pair(3,4,3,5,6));
-        assertEquals(10, Yatzy.score_pair(5,3,3,3,5));
-        assertEquals(12, Yatzy.score_pair(5,3,6,6,5));
+    public void givenThreeFourThreeFiveSixDicesResults_whenPair_ThenReturnSix() throws UnconsistentDiceResult {
+        assertEquals(
+            6,
+            Yatzy.pair(
+                DiceResultDataSet.three(),
+                DiceResultDataSet.four(),
+                DiceResultDataSet.three(),
+                DiceResultDataSet.five(),
+                DiceResultDataSet.six()
+            )
+        );
+
     }
 
+    /**
+     * Given 5, 3, 3, 3, 5 dices results
+     * When calculating pair result
+     * Then return 10
+     * @throws UnconsistentDiceResult thrown if the created dice result is not between 1 and
+     */
     @Test
-    public void two_Pair() {
-        assertEquals(16, Yatzy.two_pair(3,3,5,4,5));
-        assertEquals(16, Yatzy.two_pair(3,3,5,5,5));
+    public void givenFiveThreeThreeThreeFiveDicesResults_whenPair_ThenReturnTen() throws UnconsistentDiceResult {
+        assertEquals(
+            10,
+            Yatzy.pair(
+                DiceResultDataSet.five(),
+                DiceResultDataSet.three(),
+                DiceResultDataSet.three(),
+                DiceResultDataSet.three(),
+                DiceResultDataSet.five()
+            )
+        );
+    }
+
+    /**
+     * Given 5, 3, 6, 6, 5 dices results
+     * When calculating pair result
+     * Then return 12
+     * @throws UnconsistentDiceResult thrown if the created dice result is not between 1 and
+     */
+    @Test
+    public void givenFiveThreeSixSixFiveDicesResults_whenPair_ThenReturnTwelve() throws UnconsistentDiceResult {
+        assertEquals(
+            12,
+            Yatzy.pair(
+                DiceResultDataSet.five(),
+                DiceResultDataSet.three(),
+                DiceResultDataSet.six(),
+                DiceResultDataSet.six(),
+                DiceResultDataSet.five()
+            )
+        );
+    }
+
+    // Two pairs score
+
+    /**
+     * Given 3, 3, 5, 4, 5 dices results
+     * When calculating two pair result
+     * Then return 16
+     * @throws UnconsistentDiceResult thrown if the created dice result is not between 1 and
+     */
+    @Test
+    public void givenThreeThreeFiveFourFiveDicesResults_whenTwoPairs_ThenReturnSixteen() throws UnconsistentDiceResult {
+        assertEquals(
+            16,
+            Yatzy.twoPairs(
+                DiceResultDataSet.three(),
+                DiceResultDataSet.three(),
+                DiceResultDataSet.five(),
+                DiceResultDataSet.four(),
+                DiceResultDataSet.five()
+            )
+        );
+    }
+
+    /**
+     * Given 3, 3, 5, 5, 5 dices results
+     * When calculating two pair result
+     * Then return 16
+     * @throws UnconsistentDiceResult thrown if the created dice result is not between 1 and
+     */
+    @Test
+    public void givenThreeFiveFiveFourFiveDicesResults_whenTwoPairs_ThenReturnSixteen() throws UnconsistentDiceResult {
+        assertEquals(
+            16,
+            Yatzy.twoPairs(
+                DiceResultDataSet.three(),
+                DiceResultDataSet.three(),
+                DiceResultDataSet.five(),
+                DiceResultDataSet.five(),
+                DiceResultDataSet.five()
+            )
+        );
     }
 
     @Test
