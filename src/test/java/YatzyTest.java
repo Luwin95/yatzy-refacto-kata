@@ -1,5 +1,6 @@
 import dice.exceptions.UnconsistentDiceResult;
 import org.junit.*;
+import score.face.OnesScore;
 import utils.DiceResultDataSet;
 
 import static org.junit.Assert.*;
@@ -106,11 +107,84 @@ public class YatzyTest {
         );
     }
 
-    @Test public void test_1s() {
-        assertTrue(Yatzy.ones(1,2,3,4,5) == 1);
-        assertEquals(2, Yatzy.ones(1,2,1,4,5));
-        assertEquals(0, Yatzy.ones(6,2,2,4,5));
-        assertEquals(4, Yatzy.ones(1,2,1,1,1));
+    /**
+     * Given 1, 2, 3, 4, 5 dices results
+     * When calculating ones result
+     * Then return 1
+     * @throws UnconsistentDiceResult thrown if the created dice result is not between 1 and
+     */
+    @Test
+    public void givenOneTwoThreeFourFiveDicesResults_whenOnes_ThenReturnOne() throws UnconsistentDiceResult {
+        assertEquals(
+            1,
+            Yatzy.ones(
+                DiceResultDataSet.one(),
+                DiceResultDataSet.two(),
+                DiceResultDataSet.three(),
+                DiceResultDataSet.four(),
+                DiceResultDataSet.five()
+            )
+        );
+    }
+
+    /**
+     * Given 1, 2, 1, 4, 5 dices results
+     * When calculating ones result
+     * Then return 2
+     * @throws UnconsistentDiceResult thrown if the created dice result is not between 1 and
+     */
+    @Test
+    public void givenOneTwoOneFourFiveDicesResults_whenOnes_ThenReturnTwo() throws UnconsistentDiceResult {
+        assertEquals(
+            2,
+            Yatzy.ones(
+                DiceResultDataSet.one(),
+                DiceResultDataSet.two(),
+                DiceResultDataSet.one(),
+                DiceResultDataSet.four(),
+                DiceResultDataSet.five()
+            )
+        );
+    }
+
+    /**
+     * Given 6, 2, 2, 4, 5 dices results
+     * When calculating ones result
+     * Then return 0
+     * @throws UnconsistentDiceResult thrown if the created dice result is not between 1 and
+     */
+    @Test
+    public void givenSixTwoTwoFourFiveDicesResults_whenOnes_ThenReturnZero() throws UnconsistentDiceResult {
+        assertEquals(
+            0,
+            Yatzy.ones(
+                DiceResultDataSet.six(),
+                DiceResultDataSet.two(),
+                DiceResultDataSet.two(),
+                DiceResultDataSet.four(),
+                DiceResultDataSet.five()
+            )
+        );
+    }
+
+    /**
+     * Given 1, 2, 1, 1, 1 dices results
+     * When calculating ones result
+     * Then return 4
+     * @throws UnconsistentDiceResult thrown if the created dice result is not between 1 and
+     */
+    @Test
+    public void givenOneTwoOneOneOneDicesResults_whenOnes_ThenReturnFour() throws UnconsistentDiceResult {
+        assertEquals(
+            4,
+            Yatzy.ones(
+                DiceResultDataSet.one(),
+                DiceResultDataSet.two(),
+                DiceResultDataSet.one(),
+                DiceResultDataSet.one(),
+                DiceResultDataSet.one()
+            )
+        );
     }
 
     @Test

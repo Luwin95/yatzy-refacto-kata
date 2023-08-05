@@ -10,7 +10,7 @@ public class YatzyScore extends FixedScore{
 
     /**
      * A Yatzy score gives a 50 if all dices have the same result, 0 otherwise
-     * @return
+     * @return the score of a yatzy
      */
     @Override
     public int calculateScore() {

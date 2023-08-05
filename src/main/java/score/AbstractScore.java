@@ -5,7 +5,7 @@ import dice.DiceResult;
 import java.util.Arrays;
 import java.util.List;
 
-abstract class AbstractScore {
+public abstract class AbstractScore {
     /**
      * The list of the diceResults launched during Yatzy game, limited to 5 results
      */
