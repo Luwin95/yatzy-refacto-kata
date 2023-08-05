@@ -234,11 +234,45 @@ public class YatzyTest {
         );
     }
 
-
+    // Threes Score
+    /**
+     * Given 1, 2, 3, 2, 3 dices results
+     * When calculating chance result
+     * Then return 6
+     * @throws UnconsistentDiceResult thrown if the created dice result is not between 1 and
+     */
     @Test
-    public void test_threes() {
-        assertEquals(6, Yatzy.threes(1,2,3,2,3));
-        assertEquals(12, Yatzy.threes(2,3,3,3,3));
+    public void givenOneTwoThreeTwoThreeDicesResults_whenThrees_ThenReturnSix() throws UnconsistentDiceResult {
+        assertEquals(
+            6,
+            Yatzy.threes(
+                DiceResultDataSet.one(),
+                DiceResultDataSet.two(),
+                DiceResultDataSet.three(),
+                DiceResultDataSet.two(),
+                DiceResultDataSet.three()
+            )
+        );
+    }
+
+    /**
+     * Given 2, 3, 3, 3, 3 dices results
+     * When calculating chance result
+     * Then return 12
+     * @throws UnconsistentDiceResult thrown if the created dice result is not between 1 and
+     */
+    @Test
+    public void givenTwoThreeThreeThreeThreeDicesResults_whenThrees_ThenReturnTwelve() throws UnconsistentDiceResult {
+        assertEquals(
+            12,
+            Yatzy.threes(
+                DiceResultDataSet.two(),
+                DiceResultDataSet.three(),
+                DiceResultDataSet.three(),
+                DiceResultDataSet.three(),
+                DiceResultDataSet.three()
+            )
+        );
     }
 
     @Test
