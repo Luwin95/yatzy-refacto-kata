@@ -1,9 +1,11 @@
 import dice.DiceResult;
 import score.ChanceScore;
 import score.YatzyScore;
+import score.face.FoursScore;
 import score.face.OnesScore;
 import score.face.ThreesScore;
 import score.face.TwosScore;
+
 
 public class Yatzy {
 
@@ -29,6 +31,12 @@ public class Yatzy {
         return new ThreesScore(firstDiceResult, secondDiceResult, thirdDiceResult, fourthDiceResult, fifthDiceResult).calculateScore();
     }
 
+    public static int fours(DiceResult firstDiceResult, DiceResult secondDiceResult, DiceResult thirdDiceResult, DiceResult fourthDiceResult, DiceResult fifthDiceResult)
+    {
+        return new FoursScore(firstDiceResult, secondDiceResult, thirdDiceResult, fourthDiceResult, fifthDiceResult).calculateScore();
+    }
+
+
     protected int[] dice;
     public Yatzy(int d1, int d2, int d3, int d4, int _5)
     {
@@ -38,18 +46,6 @@ public class Yatzy {
         dice[2] = d3;
         dice[3] = d4;
         dice[4] = _5;
-    }
-
-    public int fours()
-    {
-        int sum;    
-        sum = 0;
-        for (int at = 0; at != 5; at++) {
-            if (dice[at] == 4) {
-                sum += 4;
-            }
-        }
-        return sum;
     }
 
     public int fives()

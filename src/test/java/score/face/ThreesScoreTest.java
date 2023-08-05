@@ -9,7 +9,7 @@ import static org.junit.Assert.assertEquals;
 public class ThreesScoreTest {
     /**
      * Given 1, 2, 3, 2, 3 dices results
-     * When calculating chance result
+     * When calculating threes result
      * Then return 6
      * @throws UnconsistentDiceResult thrown if the created dice result is not between 1 and
      */
@@ -28,7 +28,7 @@ public class ThreesScoreTest {
 
     /**
      * Given 2, 3, 3, 3, 3 dices results
-     * When calculating chance result
+     * When calculating threes result
      * Then return 12
      * @throws UnconsistentDiceResult thrown if the created dice result is not between 1 and
      */

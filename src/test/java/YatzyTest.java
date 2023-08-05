@@ -235,6 +235,7 @@ public class YatzyTest {
     }
 
     // Threes Score
+
     /**
      * Given 1, 2, 3, 2, 3 dices results
      * When calculating chance result
@@ -275,12 +276,67 @@ public class YatzyTest {
         );
     }
 
+    // Fours score
+
+    /**
+     * Given 4, 4, 4, 5, 5 dices results
+     * When calculating fours result
+     * Then return 12
+     * @throws UnconsistentDiceResult thrown if the created dice result is not between 1 and
+     */
     @Test
-    public void fours_test() 
-    {
-        assertEquals(12, new Yatzy(4,4,4,5,5).fours());
-        assertEquals(8, new Yatzy(4,4,5,5,5).fours());
-        assertEquals(4, new Yatzy(4,5,5,5,5).fours());
+    public void givenFourFourFourFiveFiveDicesResults_whenFours_ThenReturnTwelve() throws UnconsistentDiceResult {
+        assertEquals(
+            12,
+            Yatzy.fours(
+                DiceResultDataSet.four(),
+                DiceResultDataSet.four(),
+                DiceResultDataSet.four(),
+                DiceResultDataSet.five(),
+                DiceResultDataSet.five()
+            )
+        );
+
+    }
+
+    /**
+     * Given 4, 4, 5, 5, 5 dices results
+     * When calculating fours result
+     * Then return 8
+     * @throws UnconsistentDiceResult thrown if the created dice result is not between 1 and
+     */
+    @Test
+    public void givenFourFourFiveFiveFiveDicesResults_whenFours_ThenReturnEight() throws UnconsistentDiceResult {
+        assertEquals(
+            8,
+            Yatzy.fours(
+                DiceResultDataSet.four(),
+                DiceResultDataSet.four(),
+                DiceResultDataSet.five(),
+                DiceResultDataSet.five(),
+                DiceResultDataSet.five()
+            )
+        );
+    }
+
+    /**
+     * Given 4, 5, 5, 5, 5 dices results
+     * When calculating fours result
+     * Then return 4
+     * @throws UnconsistentDiceResult thrown if the created dice result is not between 1 and
+     */
+    @Test
+    public void givenFourFiveFiveFiveFiveDicesResults_whenFours_ThenReturnFour() throws UnconsistentDiceResult {
+        assertEquals(
+            4,
+            Yatzy.fours(
+                DiceResultDataSet.four(),
+                DiceResultDataSet.five(),
+                DiceResultDataSet.five(),
+                DiceResultDataSet.five(),
+                DiceResultDataSet.five()
+            )
+        );
     }
 
     @Test
