@@ -38,25 +38,9 @@ public class Yatzy {
         return new FivesScore(firstDiceResult, secondDiceResult, thirdDiceResult, fourthDiceResult, fifthDiceResult).calculateScore();
     }
 
-    protected int[] dice;
-    public Yatzy(int d1, int d2, int d3, int d4, int _5)
+    public static int sixes(DiceResult firstDiceResult, DiceResult secondDiceResult, DiceResult thirdDiceResult, DiceResult fourthDiceResult, DiceResult fifthDiceResult)
     {
-        dice = new int[5];
-        dice[0] = d1;
-        dice[1] = d2;
-        dice[2] = d3;
-        dice[3] = d4;
-        dice[4] = _5;
-    }
-
-
-    public int sixes()
-    {
-        int sum = 0;
-        for (int at = 0; at < dice.length; at++) 
-            if (dice[at] == 6)
-                sum = sum + 6;
-        return sum;
+        return new SixesScore(firstDiceResult, secondDiceResult, thirdDiceResult, fourthDiceResult, fifthDiceResult).calculateScore();
     }
 
     public static int score_pair(int d1, int d2, int d3, int d4, int d5)
