@@ -1,12 +1,15 @@
 package score;
 
+import dice.DiceResult;
 import dice.exceptions.UnconsistentDiceResult;
 import org.junit.Test;
 import utils.DiceResultDataSet;
 
+import java.util.List;
+
 import static org.junit.Assert.assertEquals;
 
-public class ChanceScoreTest {
+public class ChanceScoreTest extends AbstractScoreTest {
     /**
      * Given 2, 3, 4, 5, 1 dices results
      * When calculating chance result
@@ -15,7 +18,7 @@ public class ChanceScoreTest {
      */
     @Test
     public void givenTwoThreeFourFiveAndOneDicesResults_whenCalculateChanceScore_ThenReturnFifteen() throws UnconsistentDiceResult {
-        ChanceScore actualChanceScore = new ChanceScore(
+        List<DiceResult> diceResults = this.initializeDicesResults(
             DiceResultDataSet.two(),
             DiceResultDataSet.three(),
             DiceResultDataSet.four(),
@@ -23,7 +26,7 @@ public class ChanceScoreTest {
             DiceResultDataSet.one()
         );
 
-        assertEquals(15, actualChanceScore.calculateScore());
+        assertEquals(15, ChanceScore.getInstance().calculateScore(diceResults));
     }
 
     /**
@@ -34,14 +37,15 @@ public class ChanceScoreTest {
      */
     @Test
     public void givenThreeThreeFourFiveAndOneDicesResults_whenCalculateChanceScore_ThenReturnSixteen() throws UnconsistentDiceResult {
-        ChanceScore actualChanceScore = new ChanceScore(
+        List<DiceResult> diceResults = this.initializeDicesResults(
             DiceResultDataSet.three(),
             DiceResultDataSet.three(),
             DiceResultDataSet.four(),
             DiceResultDataSet.five(),
             DiceResultDataSet.one()
         );
-        assertEquals(16, actualChanceScore.calculateScore());
+
+        assertEquals(16, ChanceScore.getInstance().calculateScore(diceResults));
     }
 
 }

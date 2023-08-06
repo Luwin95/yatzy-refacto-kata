@@ -1,13 +1,17 @@
 package score.fixed;
 
+import dice.DiceResult;
 import dice.exceptions.UnconsistentDiceResult;
 import org.junit.Test;
+import score.AbstractScoreTest;
 import score.fixed.YatzyScore;
 import utils.DiceResultDataSet;
 
+import java.util.List;
+
 import static org.junit.Assert.assertEquals;
 
-public class YatzyScoreTest {
+public class YatzyScoreTest extends AbstractScoreTest {
 
     /**
      * Given 4, 4, 4, 4, 4 dices results
@@ -17,7 +21,7 @@ public class YatzyScoreTest {
      */
     @Test
     public void givenOnlyFoursDicesResults_whenCalculateYatzyScore_ThenReturnFifty() throws UnconsistentDiceResult {
-        YatzyScore actualYatzyScore = new YatzyScore(
+        List<DiceResult> diceResults = this.initializeDicesResults(
             DiceResultDataSet.four(),
             DiceResultDataSet.four(),
             DiceResultDataSet.four(),
@@ -25,7 +29,7 @@ public class YatzyScoreTest {
             DiceResultDataSet.four()
         );
 
-        assertEquals(50, actualYatzyScore.calculateScore());
+        assertEquals(50, YatzyScore.getInstance().calculateScore(diceResults));
     }
 
     /**
@@ -36,7 +40,7 @@ public class YatzyScoreTest {
      */
     @Test
     public void givenOnlySixesDicesResults_whenCalculateYatzyScore_ThenReturnFifty() throws UnconsistentDiceResult {
-        YatzyScore actualYatzyScore = new YatzyScore(
+        List<DiceResult> diceResults = this.initializeDicesResults(
             DiceResultDataSet.six(),
             DiceResultDataSet.six(),
             DiceResultDataSet.six(),
@@ -44,7 +48,7 @@ public class YatzyScoreTest {
             DiceResultDataSet.six()
         );
 
-        assertEquals(50, actualYatzyScore.calculateScore());
+        assertEquals(50, YatzyScore.getInstance().calculateScore(diceResults));
     }
 
     /**
@@ -55,13 +59,14 @@ public class YatzyScoreTest {
      */
     @Test
     public void givenFourSixesAndAThreeDicesResults_whenCalculateYatzyScore_ThenReturnZero() throws UnconsistentDiceResult {
-        YatzyScore actualYatzyScore = new YatzyScore(
+        List<DiceResult> diceResults = this.initializeDicesResults(
             DiceResultDataSet.six(),
             DiceResultDataSet.six(),
             DiceResultDataSet.six(),
             DiceResultDataSet.six(),
             DiceResultDataSet.three()
         );
-        assertEquals(0, actualYatzyScore.calculateScore());
+
+        assertEquals(0, YatzyScore.getInstance().calculateScore(diceResults));
     }
 }

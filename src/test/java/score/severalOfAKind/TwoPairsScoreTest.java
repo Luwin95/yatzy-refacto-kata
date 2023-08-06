@@ -1,12 +1,16 @@
 package score.severalOfAKind;
 
+import dice.DiceResult;
 import dice.exceptions.UnconsistentDiceResult;
 import org.junit.Test;
+import score.AbstractScoreTest;
 import utils.DiceResultDataSet;
+
+import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 
-public class TwoPairsScoreTest {
+public class TwoPairsScoreTest extends AbstractScoreTest {
     /**
      * Given 3, 3, 5, 4, 5 dices results
      * When calculating two pair result
@@ -15,14 +19,15 @@ public class TwoPairsScoreTest {
      */
     @Test
     public void givenThreeThreeFiveFourFiveDicesResults_whenCalculateTwoPairsScore_ThenReturnSixteen() throws UnconsistentDiceResult {
-        TwoPairsScore actualTwoPairsScore = new TwoPairsScore(
+        List<DiceResult> diceResults = this.initializeDicesResults(
             DiceResultDataSet.three(),
             DiceResultDataSet.three(),
             DiceResultDataSet.five(),
             DiceResultDataSet.four(),
             DiceResultDataSet.five()
         );
-        assertEquals(16, actualTwoPairsScore.calculateScore());
+
+        assertEquals(16, TwoPairsScore.getInstance().calculateScore(diceResults));
     }
 
     /**
@@ -33,14 +38,15 @@ public class TwoPairsScoreTest {
      */
     @Test
     public void givenThreeFiveFiveFourFiveDicesResults_whenCalculateTwoPairsScore_ThenReturnSixteen() throws UnconsistentDiceResult {
-        TwoPairsScore actualTwoPairsScore = new TwoPairsScore(
+        List<DiceResult> diceResults = this.initializeDicesResults(
             DiceResultDataSet.three(),
             DiceResultDataSet.three(),
             DiceResultDataSet.five(),
             DiceResultDataSet.five(),
             DiceResultDataSet.five()
         );
-        assertEquals(16, actualTwoPairsScore.calculateScore());
+
+        assertEquals(16, TwoPairsScore.getInstance().calculateScore(diceResults));
     }
 
 }

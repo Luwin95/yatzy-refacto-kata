@@ -1,12 +1,16 @@
 package score.fixed.straight;
 
+import dice.DiceResult;
 import dice.exceptions.UnconsistentDiceResult;
 import org.junit.Test;
+import score.AbstractScoreTest;
 import utils.DiceResultDataSet;
+
+import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 
-public class LargeStraightScoreTest {
+public class LargeStraightScoreTest extends AbstractScoreTest {
     /**
      * Given 6, 2, 3, 4, 5 dices results
      * When calculating large straight result
@@ -15,7 +19,7 @@ public class LargeStraightScoreTest {
      */
     @Test
     public void givenSixTwoThreeFourFiveDicesResults_whenCalculateLargeStraightScore_ThenReturnTwenty() throws UnconsistentDiceResult {
-        LargeStraightScore largeStraightScore = new LargeStraightScore(
+        List<DiceResult> diceResults = this.initializeDicesResults(
             DiceResultDataSet.six(),
             DiceResultDataSet.two(),
             DiceResultDataSet.three(),
@@ -23,7 +27,7 @@ public class LargeStraightScoreTest {
             DiceResultDataSet.five()
         );
 
-        assertEquals(20, largeStraightScore.calculateScore());
+        assertEquals(20, LargeStraightScore.getInstance().calculateScore(diceResults));
     }
 
     /**
@@ -34,7 +38,7 @@ public class LargeStraightScoreTest {
      */
     @Test
     public void givenTwoThreeFourFiveSixDicesResults_whenCalculateLargeStraightScore_ThenReturnTwenty() throws UnconsistentDiceResult {
-        LargeStraightScore largeStraightScore = new LargeStraightScore(
+        List<DiceResult> diceResults = this.initializeDicesResults(
             DiceResultDataSet.two(),
             DiceResultDataSet.three(),
             DiceResultDataSet.four(),
@@ -42,7 +46,7 @@ public class LargeStraightScoreTest {
             DiceResultDataSet.six()
         );
 
-        assertEquals(20, largeStraightScore.calculateScore());
+        assertEquals(20, LargeStraightScore.getInstance().calculateScore(diceResults));
     }
 
     /**
@@ -53,7 +57,7 @@ public class LargeStraightScoreTest {
      */
     @Test
     public void givenOneTwoTwoFourFiveDicesResults_whenCalculateLargeStraightScore_ThenReturnZero() throws UnconsistentDiceResult {
-        LargeStraightScore largeStraightScore = new LargeStraightScore(
+        List<DiceResult> diceResults = this.initializeDicesResults(
             DiceResultDataSet.one(),
             DiceResultDataSet.two(),
             DiceResultDataSet.two(),
@@ -61,6 +65,6 @@ public class LargeStraightScoreTest {
             DiceResultDataSet.five()
         );
 
-        assertEquals(0, largeStraightScore.calculateScore());
+        assertEquals(0, LargeStraightScore.getInstance().calculateScore(diceResults));
     }
 }

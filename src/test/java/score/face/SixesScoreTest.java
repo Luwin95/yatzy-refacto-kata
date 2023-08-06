@@ -1,12 +1,16 @@
 package score.face;
 
+import dice.DiceResult;
 import dice.exceptions.UnconsistentDiceResult;
 import org.junit.Test;
+import score.AbstractScoreTest;
 import utils.DiceResultDataSet;
+
+import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 
-public class SixesScoreTest {
+public class SixesScoreTest extends AbstractScoreTest {
     /**
      * Given 4, 4, 4, 5, 5 dices results
      * When calculating sixes result
@@ -16,15 +20,15 @@ public class SixesScoreTest {
      */
     @Test
     public void givenFourFourFourFiveFiveDicesResults_whenCalculateSixesScore_ThenReturnZero() throws UnconsistentDiceResult {
-        SixesScore actualSixesScore = new SixesScore(
-            DiceResultDataSet.four(),
-            DiceResultDataSet.four(),
-            DiceResultDataSet.four(),
-            DiceResultDataSet.five(),
-            DiceResultDataSet.five()
+        List<DiceResult> diceResults = this.initializeDicesResults(
+            DiceResultDataSet.one(),
+            DiceResultDataSet.two(),
+            DiceResultDataSet.one(),
+            DiceResultDataSet.one(),
+            DiceResultDataSet.one()
         );
 
-        assertEquals(0, actualSixesScore.calculateScore());
+        assertEquals(0, SixesScore.getInstance().calculateScore(diceResults));
     }
 
     /**
@@ -36,7 +40,7 @@ public class SixesScoreTest {
      */
     @Test
     public void givenFourFourSixFiveFiveDicesResults_whenCalculateSixesScore_ThenReturnSixes() throws UnconsistentDiceResult {
-        SixesScore actualSixesScore = new SixesScore(
+        List<DiceResult> diceResults = this.initializeDicesResults(
             DiceResultDataSet.four(),
             DiceResultDataSet.four(),
             DiceResultDataSet.six(),
@@ -44,7 +48,7 @@ public class SixesScoreTest {
             DiceResultDataSet.five()
         );
 
-        assertEquals(6, actualSixesScore.calculateScore());
+        assertEquals(6, SixesScore.getInstance().calculateScore(diceResults));
     }
 
     /**
@@ -56,14 +60,13 @@ public class SixesScoreTest {
      */
     @Test
     public void givenSixFiveSixSixFiveDicesResults_whenCalculateSixesScore_ThenReturnEighteen() throws UnconsistentDiceResult {
-        SixesScore actualSixesScore = new SixesScore(
+        List<DiceResult> diceResults = this.initializeDicesResults(
             DiceResultDataSet.six(),
             DiceResultDataSet.five(),
             DiceResultDataSet.six(),
             DiceResultDataSet.six(),
             DiceResultDataSet.five()
         );
-
-        assertEquals(18, actualSixesScore.calculateScore());
+        assertEquals(18, SixesScore.getInstance().calculateScore(diceResults));
     }
 }

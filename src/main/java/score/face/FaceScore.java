@@ -3,11 +3,13 @@ package score.face;
 import dice.DiceResult;
 import score.AbstractScore;
 
+import java.util.List;
+
 abstract class FaceScore extends AbstractScore {
     private final int face;
 
-    public FaceScore(DiceResult firstDiceResult, DiceResult secondDiceResult, DiceResult thirdDiceResult, DiceResult fourthDiceResult, DiceResult fifthDiceResult, int face) {
-        super(firstDiceResult, secondDiceResult, thirdDiceResult, fourthDiceResult, fifthDiceResult);
+    public FaceScore(int face) {
+        super();
         this.face = face;
     }
 
@@ -16,7 +18,7 @@ abstract class FaceScore extends AbstractScore {
      * @return the sum or all dices matching the given face
      */
     @Override
-    public int calculateScore() {
-        return this.diceResults.stream().filter(currentDiceResult -> currentDiceResult.getResult() == this.face).mapToInt(DiceResult::getResult).sum();
+    public int calculateScore(List<DiceResult> diceResults) {
+        return diceResults.stream().filter(currentDiceResult -> currentDiceResult.getResult() == this.face).mapToInt(DiceResult::getResult).sum();
     }
 }

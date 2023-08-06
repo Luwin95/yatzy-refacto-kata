@@ -1,19 +1,25 @@
 package score;
 
 import dice.DiceResult;
+import score.severalOfAKind.TwoPairsScore;
+
+import java.util.List;
 
 public class ChanceScore extends AbstractScore {
 
-    public ChanceScore(DiceResult firstDiceResult, DiceResult secondDiceResult, DiceResult thirdDiceResult, DiceResult fourthDiceResult, DiceResult fifthDiceResult) {
-        super(firstDiceResult, secondDiceResult, thirdDiceResult, fourthDiceResult, fifthDiceResult);
+    private static final ChanceScore instance = new ChanceScore();
+
+    public static ChanceScore getInstance(){
+        return instance;
     }
 
+    private ChanceScore(){}
     /**
      * A chance score is the sum of all dice result
      * @return the total of all five dices
      */
     @Override
-    public int calculateScore() {
-        return this.diceResults.stream().mapToInt(DiceResult::getResult).sum();
+    public int calculateScore(List<DiceResult> diceResults) {
+        return diceResults.stream().mapToInt(DiceResult::getResult).sum();
     }
 }

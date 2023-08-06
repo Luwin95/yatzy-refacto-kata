@@ -1,10 +1,15 @@
+import dice.DiceResult;
 import dice.exceptions.UnconsistentDiceResult;
 import org.junit.*;
 import utils.DiceResultDataSet;
 
 import static org.junit.Assert.*;
 
-public class YatzyTest {
+public class YatzyGameTest {
+    
+    private YatzyGame initializeYatzyGame(DiceResult firstDiceResult, DiceResult secondDiceResult, DiceResult thirdDiceResult, DiceResult fourthDiceResult, DiceResult fifthDiceResult){
+        return new YatzyGame(firstDiceResult, secondDiceResult, thirdDiceResult, fourthDiceResult, fifthDiceResult);
+    }
 
     // Chance Score
 
@@ -18,13 +23,13 @@ public class YatzyTest {
     public void givenTwoThreeFourFiveAndOneDicesResults_whenChance_ThenReturnFifteen() throws UnconsistentDiceResult {
         assertEquals(
             15,
-            Yatzy.chance(
+            this.initializeYatzyGame(
                 DiceResultDataSet.two(),
                 DiceResultDataSet.three(),
                 DiceResultDataSet.four(),
                 DiceResultDataSet.five(),
                 DiceResultDataSet.one()
-            )
+            ).chance()
         );
     }
 
@@ -40,13 +45,13 @@ public class YatzyTest {
     public void givenThreeThreeFourFiveAndOneDicesResults_whenChance_ThenReturnSixteen() throws UnconsistentDiceResult {
         assertEquals(
             16,
-            Yatzy.chance(
+            this.initializeYatzyGame(
                 DiceResultDataSet.three(),
                 DiceResultDataSet.three(),
                 DiceResultDataSet.four(),
                 DiceResultDataSet.five(),
                 DiceResultDataSet.one()
-            )
+            ).chance()
         );
     }
 
@@ -60,13 +65,13 @@ public class YatzyTest {
     public void givenOnlyFoursDicesResults_whenYatzy_ThenReturnFifty() throws UnconsistentDiceResult {
         assertEquals(
             50,
-            Yatzy.yatzy(
+            this.initializeYatzyGame(
                 DiceResultDataSet.four(),
                 DiceResultDataSet.four(),
                 DiceResultDataSet.four(),
                 DiceResultDataSet.four(),
                 DiceResultDataSet.four()
-            )
+            ).yatzy()
         );
     }
 
@@ -80,13 +85,13 @@ public class YatzyTest {
     public void givenOnlySixesDicesResults_whenYatzy_ThenReturnFifty() throws UnconsistentDiceResult {
         assertEquals(
             50,
-            Yatzy.yatzy(
+            this.initializeYatzyGame(
                 DiceResultDataSet.six(),
                 DiceResultDataSet.six(),
                 DiceResultDataSet.six(),
                 DiceResultDataSet.six(),
                 DiceResultDataSet.six()
-            )
+            ).yatzy()
         );
     }
 
@@ -100,13 +105,13 @@ public class YatzyTest {
     public void givenFourSixesAndAThreeDicesResults_whenYatzy_ThenReturnZero() throws UnconsistentDiceResult {
         assertEquals(
             0,
-            Yatzy.yatzy(
+            this.initializeYatzyGame(
                 DiceResultDataSet.six(),
                 DiceResultDataSet.six(),
                 DiceResultDataSet.six(),
                 DiceResultDataSet.six(),
                 DiceResultDataSet.three()
-            )
+            ).yatzy()
         );
     }
 
@@ -122,13 +127,13 @@ public class YatzyTest {
     public void givenOneTwoThreeFourFiveDicesResults_whenOnes_ThenReturnOne() throws UnconsistentDiceResult {
         assertEquals(
             1,
-            Yatzy.ones(
+            this.initializeYatzyGame(
                 DiceResultDataSet.one(),
                 DiceResultDataSet.two(),
                 DiceResultDataSet.three(),
                 DiceResultDataSet.four(),
                 DiceResultDataSet.five()
-            )
+            ).ones()
         );
     }
 
@@ -142,13 +147,13 @@ public class YatzyTest {
     public void givenOneTwoOneFourFiveDicesResults_whenOnes_ThenReturnTwo() throws UnconsistentDiceResult {
         assertEquals(
             2,
-            Yatzy.ones(
+            this.initializeYatzyGame(
                 DiceResultDataSet.one(),
                 DiceResultDataSet.two(),
                 DiceResultDataSet.one(),
                 DiceResultDataSet.four(),
                 DiceResultDataSet.five()
-            )
+            ).ones()
         );
     }
 
@@ -162,13 +167,13 @@ public class YatzyTest {
     public void givenSixTwoTwoFourFiveDicesResults_whenOnes_ThenReturnZero() throws UnconsistentDiceResult {
         assertEquals(
             0,
-            Yatzy.ones(
+            this.initializeYatzyGame(
                 DiceResultDataSet.six(),
                 DiceResultDataSet.two(),
                 DiceResultDataSet.two(),
                 DiceResultDataSet.four(),
                 DiceResultDataSet.five()
-            )
+            ).ones()
         );
     }
 
@@ -182,13 +187,13 @@ public class YatzyTest {
     public void givenOneTwoOneOneOneDicesResults_whenOnes_ThenReturnFour() throws UnconsistentDiceResult {
         assertEquals(
             4,
-            Yatzy.ones(
+            this.initializeYatzyGame(
                 DiceResultDataSet.one(),
                 DiceResultDataSet.two(),
                 DiceResultDataSet.one(),
                 DiceResultDataSet.one(),
                 DiceResultDataSet.one()
-            )
+            ).ones()
         );
     }
 
@@ -204,13 +209,13 @@ public class YatzyTest {
     public void givenOneTwoThreeTwoSixDicesResults_whenTwos_ThenReturnFour() throws UnconsistentDiceResult {
         assertEquals(
             4,
-            Yatzy.twos(
+            this.initializeYatzyGame(
                 DiceResultDataSet.one(),
                 DiceResultDataSet.two(),
                 DiceResultDataSet.three(),
                 DiceResultDataSet.two(),
                 DiceResultDataSet.six()
-            )
+            ).twos()
         );
     }
 
@@ -224,13 +229,13 @@ public class YatzyTest {
     public void givenFiveTwosDicesResults_Twos_ThenReturnTen() throws UnconsistentDiceResult {
         assertEquals(
             10,
-            Yatzy.twos(
+            this.initializeYatzyGame(
                 DiceResultDataSet.two(),
                 DiceResultDataSet.two(),
                 DiceResultDataSet.two(),
                 DiceResultDataSet.two(),
                 DiceResultDataSet.two()
-            )
+            ).twos()
         );
     }
 
@@ -246,13 +251,13 @@ public class YatzyTest {
     public void givenOneTwoThreeTwoThreeDicesResults_whenThrees_ThenReturnSix() throws UnconsistentDiceResult {
         assertEquals(
             6,
-            Yatzy.threes(
+            this.initializeYatzyGame(
                 DiceResultDataSet.one(),
                 DiceResultDataSet.two(),
                 DiceResultDataSet.three(),
                 DiceResultDataSet.two(),
                 DiceResultDataSet.three()
-            )
+            ).threes()
         );
     }
 
@@ -266,13 +271,13 @@ public class YatzyTest {
     public void givenTwoThreeThreeThreeThreeDicesResults_whenThrees_ThenReturnTwelve() throws UnconsistentDiceResult {
         assertEquals(
             12,
-            Yatzy.threes(
+            this.initializeYatzyGame(
                 DiceResultDataSet.two(),
                 DiceResultDataSet.three(),
                 DiceResultDataSet.three(),
                 DiceResultDataSet.three(),
                 DiceResultDataSet.three()
-            )
+            ).threes()
         );
     }
 
@@ -288,13 +293,13 @@ public class YatzyTest {
     public void givenFourFourFourFiveFiveDicesResults_whenFours_ThenReturnTwelve() throws UnconsistentDiceResult {
         assertEquals(
             12,
-            Yatzy.fours(
+            this.initializeYatzyGame(
                 DiceResultDataSet.four(),
                 DiceResultDataSet.four(),
                 DiceResultDataSet.four(),
                 DiceResultDataSet.five(),
                 DiceResultDataSet.five()
-            )
+            ).fours()
         );
 
     }
@@ -309,13 +314,13 @@ public class YatzyTest {
     public void givenFourFourFiveFiveFiveDicesResults_whenFours_ThenReturnEight() throws UnconsistentDiceResult {
         assertEquals(
             8,
-            Yatzy.fours(
+            this.initializeYatzyGame(
                 DiceResultDataSet.four(),
                 DiceResultDataSet.four(),
                 DiceResultDataSet.five(),
                 DiceResultDataSet.five(),
                 DiceResultDataSet.five()
-            )
+            ).fours()
         );
     }
 
@@ -329,13 +334,13 @@ public class YatzyTest {
     public void givenFourFiveFiveFiveFiveDicesResults_whenFours_ThenReturnFour() throws UnconsistentDiceResult {
         assertEquals(
             4,
-            Yatzy.fours(
+            this.initializeYatzyGame(
                 DiceResultDataSet.four(),
                 DiceResultDataSet.five(),
                 DiceResultDataSet.five(),
                 DiceResultDataSet.five(),
                 DiceResultDataSet.five()
-            )
+            ).fours()
         );
     }
 
@@ -352,13 +357,13 @@ public class YatzyTest {
     public void givenFourFourFourFiveFiveDicesResults_whenFives_ThenReturnTen() throws UnconsistentDiceResult {
         assertEquals(
             10,
-            Yatzy.fives(
+            this.initializeYatzyGame(
                 DiceResultDataSet.four(),
                 DiceResultDataSet.four(),
                 DiceResultDataSet.four(),
                 DiceResultDataSet.five(),
                 DiceResultDataSet.five()
-            )
+            ).fives()
         );
     }
 
@@ -373,13 +378,13 @@ public class YatzyTest {
     public void givenFourFourFiveFiveFiveDicesResults_whenFives_ThenReturnFifteen() throws UnconsistentDiceResult {
         assertEquals(
             15,
-            Yatzy.fives(
+            this.initializeYatzyGame(
                 DiceResultDataSet.four(),
                 DiceResultDataSet.four(),
                 DiceResultDataSet.five(),
                 DiceResultDataSet.five(),
                 DiceResultDataSet.five()
-            )
+            ).fives()
         );
     }
 
@@ -394,13 +399,13 @@ public class YatzyTest {
     public void givenFourFiveFiveFiveFiveDicesResults_whenFives_ThenReturnTwenty() throws UnconsistentDiceResult {
         assertEquals(
             20,
-            Yatzy.fives(
+            this.initializeYatzyGame(
                 DiceResultDataSet.four(),
                 DiceResultDataSet.five(),
                 DiceResultDataSet.five(),
                 DiceResultDataSet.five(),
                 DiceResultDataSet.five()
-            )
+            ).fives()
         );
     }
 
@@ -417,13 +422,13 @@ public class YatzyTest {
     public void givenFourFourFourFiveFiveDicesResults_whenSixes_ThenReturnZero() throws UnconsistentDiceResult {
         assertEquals(
             0,
-            Yatzy.sixes(
+            this.initializeYatzyGame(
                 DiceResultDataSet.four(),
                 DiceResultDataSet.four(),
                 DiceResultDataSet.four(),
                 DiceResultDataSet.five(),
                 DiceResultDataSet.five()
-            )
+            ).sixes()
         );
     }
 
@@ -438,13 +443,13 @@ public class YatzyTest {
     public void givenFourFourSixFiveFiveDicesResults_whenCalculateSixesScore_ThenReturnSixes() throws UnconsistentDiceResult {
         assertEquals(
             6,
-            Yatzy.sixes(
+            this.initializeYatzyGame(
                 DiceResultDataSet.four(),
                 DiceResultDataSet.four(),
                 DiceResultDataSet.six(),
                 DiceResultDataSet.five(),
                 DiceResultDataSet.five()
-            )
+            ).sixes()
         );
     }
 
@@ -459,13 +464,13 @@ public class YatzyTest {
     public void givenSixFiveSixSixFiveDicesResults_whenSixes_ThenReturnEighteen() throws UnconsistentDiceResult {
         assertEquals(
             18,
-            Yatzy.sixes(
+            this.initializeYatzyGame(
                 DiceResultDataSet.six(),
                 DiceResultDataSet.five(),
                 DiceResultDataSet.six(),
                 DiceResultDataSet.six(),
                 DiceResultDataSet.five()
-            )
+            ).sixes()
         );
 
     }
@@ -482,13 +487,13 @@ public class YatzyTest {
     public void givenThreeFourThreeFiveSixDicesResults_whenPair_ThenReturnSix() throws UnconsistentDiceResult {
         assertEquals(
             6,
-            Yatzy.pair(
+            this.initializeYatzyGame(
                 DiceResultDataSet.three(),
                 DiceResultDataSet.four(),
                 DiceResultDataSet.three(),
                 DiceResultDataSet.five(),
                 DiceResultDataSet.six()
-            )
+            ).pair()
         );
 
     }
@@ -503,13 +508,13 @@ public class YatzyTest {
     public void givenFiveThreeThreeThreeFiveDicesResults_whenPair_ThenReturnTen() throws UnconsistentDiceResult {
         assertEquals(
             10,
-            Yatzy.pair(
+            this.initializeYatzyGame(
                 DiceResultDataSet.five(),
                 DiceResultDataSet.three(),
                 DiceResultDataSet.three(),
                 DiceResultDataSet.three(),
                 DiceResultDataSet.five()
-            )
+            ).pair()
         );
     }
 
@@ -523,13 +528,13 @@ public class YatzyTest {
     public void givenFiveThreeSixSixFiveDicesResults_whenPair_ThenReturnTwelve() throws UnconsistentDiceResult {
         assertEquals(
             12,
-            Yatzy.pair(
+            this.initializeYatzyGame(
                 DiceResultDataSet.five(),
                 DiceResultDataSet.three(),
                 DiceResultDataSet.six(),
                 DiceResultDataSet.six(),
                 DiceResultDataSet.five()
-            )
+            ).pair()
         );
     }
 
@@ -545,13 +550,13 @@ public class YatzyTest {
     public void givenThreeThreeFiveFourFiveDicesResults_whenTwoPairs_ThenReturnSixteen() throws UnconsistentDiceResult {
         assertEquals(
             16,
-            Yatzy.twoPairs(
+            this.initializeYatzyGame(
                 DiceResultDataSet.three(),
                 DiceResultDataSet.three(),
                 DiceResultDataSet.five(),
                 DiceResultDataSet.four(),
                 DiceResultDataSet.five()
-            )
+            ).twoPairs()
         );
     }
 
@@ -565,13 +570,13 @@ public class YatzyTest {
     public void givenThreeFiveFiveFourFiveDicesResults_whenTwoPairs_ThenReturnSixteen() throws UnconsistentDiceResult {
         assertEquals(
             16,
-            Yatzy.twoPairs(
+            this.initializeYatzyGame(
                 DiceResultDataSet.three(),
                 DiceResultDataSet.three(),
                 DiceResultDataSet.five(),
                 DiceResultDataSet.five(),
                 DiceResultDataSet.five()
-            )
+            ).twoPairs()
         );
     }
 
@@ -587,13 +592,13 @@ public class YatzyTest {
     public void givenThreeThreeThreeFourFiveDicesResults_whenThreeOfAKind_ThenReturnNine() throws UnconsistentDiceResult {
         assertEquals(
             9,
-            Yatzy.threeOfAKind(
+            this.initializeYatzyGame(
                 DiceResultDataSet.three(),
                 DiceResultDataSet.three(),
                 DiceResultDataSet.three(),
                 DiceResultDataSet.four(),
                 DiceResultDataSet.five()
-            )
+            ).threeOfAKind()
         );
     }
 
@@ -607,13 +612,13 @@ public class YatzyTest {
     public void givenFiveThreeFiveFourFiveDicesResults_whenThreeOfAKind_ThenReturnFifteen() throws UnconsistentDiceResult {
         assertEquals(
             15,
-            Yatzy.threeOfAKind(
+            this.initializeYatzyGame(
                 DiceResultDataSet.five(),
                 DiceResultDataSet.three(),
                 DiceResultDataSet.five(),
                 DiceResultDataSet.four(),
                 DiceResultDataSet.five()
-            )
+            ).threeOfAKind()
         );
     }
 
@@ -627,13 +632,13 @@ public class YatzyTest {
     public void givenThreeThreeThreeThreeFiveDicesResults_whenCalculateThreeOfAKindScore_ThenReturnNine() throws UnconsistentDiceResult {
         assertEquals(
             9,
-            Yatzy.threeOfAKind(
+            this.initializeYatzyGame(
                 DiceResultDataSet.three(),
                 DiceResultDataSet.three(),
                 DiceResultDataSet.three(),
                 DiceResultDataSet.three(),
                 DiceResultDataSet.five()
-            )
+            ).threeOfAKind()
         );
     }
 
@@ -649,13 +654,13 @@ public class YatzyTest {
     public void givenThreeThreeThreeThreeFiveDicesResults_whenFourOfAKind_ThenReturnTwelve() throws UnconsistentDiceResult {
         assertEquals(
             12,
-            Yatzy.fourOfAKind(
+            this.initializeYatzyGame(
                 DiceResultDataSet.three(),
                 DiceResultDataSet.three(),
                 DiceResultDataSet.three(),
                 DiceResultDataSet.three(),
                 DiceResultDataSet.five()
-            )
+            ).fourOfAKind()
         );
     }
 
@@ -669,13 +674,13 @@ public class YatzyTest {
     public void givenFiveFiveFiveFourFiveDicesResults_whenFourOfAKind_ThenReturnTwenty() throws UnconsistentDiceResult {
         assertEquals(
             20,
-            Yatzy.fourOfAKind(
+            this.initializeYatzyGame(
                 DiceResultDataSet.five(),
                 DiceResultDataSet.five(),
                 DiceResultDataSet.five(),
                 DiceResultDataSet.four(),
                 DiceResultDataSet.five()
-            )
+            ).fourOfAKind()
         );
     }
 
@@ -689,13 +694,13 @@ public class YatzyTest {
     public void givenOnlyThreesDicesResults_whenFourOfAKind_ThenReturnTwelve() throws UnconsistentDiceResult {
         assertEquals(
             12,
-            Yatzy.fourOfAKind(
+            this.initializeYatzyGame(
                 DiceResultDataSet.three(),
                 DiceResultDataSet.three(),
                 DiceResultDataSet.three(),
                 DiceResultDataSet.three(),
                 DiceResultDataSet.three()
-            )
+            ).fourOfAKind()
         );
     }
 
@@ -711,13 +716,13 @@ public class YatzyTest {
     public void givenOneTwoThreeFourFiveDicesResults_whenSmallStraight_ThenReturnFifteen() throws UnconsistentDiceResult {
         assertEquals(
             15,
-            Yatzy.smallStraight(
+            this.initializeYatzyGame(
                 DiceResultDataSet.one(),
                 DiceResultDataSet.two(),
                 DiceResultDataSet.three(),
                 DiceResultDataSet.four(),
                 DiceResultDataSet.five()
-            )
+            ).smallStraight()
         );
     }
 
@@ -731,13 +736,13 @@ public class YatzyTest {
     public void givenTwoThreeFourFiveOneDicesResults_whenSmallStraight_ThenReturnFifteen() throws UnconsistentDiceResult {
         assertEquals(
             15,
-            Yatzy.smallStraight(
+            this.initializeYatzyGame(
                 DiceResultDataSet.two(),
                 DiceResultDataSet.three(),
                 DiceResultDataSet.four(),
                 DiceResultDataSet.five(),
                 DiceResultDataSet.one()
-            )
+            ).smallStraight()
         );
     }
 
@@ -751,13 +756,13 @@ public class YatzyTest {
     public void givenOneTwoTwoFourFiveDicesResults_whenSmallStraight_ThenReturnZero() throws UnconsistentDiceResult {
         assertEquals(
             0,
-            Yatzy.smallStraight(
+            this.initializeYatzyGame(
                 DiceResultDataSet.one(),
                 DiceResultDataSet.two(),
                 DiceResultDataSet.two(),
                 DiceResultDataSet.four(),
                 DiceResultDataSet.five()
-            )
+            ).smallStraight()
         );
     }
 
@@ -773,13 +778,13 @@ public class YatzyTest {
     public void givenSixTwoThreeFourFiveDicesResults_whenLargeStraight_ThenReturnTwenty() throws UnconsistentDiceResult {
         assertEquals(
             20,
-            Yatzy.largeStraight(
+            this.initializeYatzyGame(
                 DiceResultDataSet.six(),
                 DiceResultDataSet.two(),
                 DiceResultDataSet.three(),
                 DiceResultDataSet.four(),
                 DiceResultDataSet.five()
-            )
+            ).largeStraight()
         );
     }
 
@@ -793,13 +798,13 @@ public class YatzyTest {
     public void givenTwoThreeFourFiveSixDicesResults_whenLargeStraight_ThenReturnTwenty() throws UnconsistentDiceResult {
         assertEquals(
             20,
-            Yatzy.largeStraight(
+            this.initializeYatzyGame(
                 DiceResultDataSet.two(),
                 DiceResultDataSet.three(),
                 DiceResultDataSet.four(),
                 DiceResultDataSet.five(),
                 DiceResultDataSet.six()
-            )
+            ).largeStraight()
         );
     }
 
@@ -813,13 +818,13 @@ public class YatzyTest {
     public void givenOneTwoTwoFourFiveDicesResults_whenLargeStraight_ThenReturnZero() throws UnconsistentDiceResult {
         assertEquals(
             0,
-            Yatzy.largeStraight(
+            this.initializeYatzyGame(
                 DiceResultDataSet.one(),
                 DiceResultDataSet.two(),
                 DiceResultDataSet.two(),
                 DiceResultDataSet.four(),
                 DiceResultDataSet.five()
-            )
+            ).largeStraight()
         );
     }
 
@@ -835,13 +840,13 @@ public class YatzyTest {
     public void givenSixTwoTwoTwoSixDicesResults_whenFullHouse_ThenReturnEighteen() throws UnconsistentDiceResult {
         assertEquals(
             18,
-            Yatzy.fullHouse(
+            this.initializeYatzyGame(
                 DiceResultDataSet.six(),
                 DiceResultDataSet.two(),
                 DiceResultDataSet.two(),
                 DiceResultDataSet.two(),
                 DiceResultDataSet.six()
-            )
+            ).fullHouse()
         );
     }
 
@@ -855,13 +860,13 @@ public class YatzyTest {
     public void givenTwoThreeFourFiveSixDicesResults_whenFullHouse_ThenReturnZero() throws UnconsistentDiceResult {
         assertEquals(
             0,
-            Yatzy.fullHouse(
+            this.initializeYatzyGame(
                 DiceResultDataSet.two(),
                 DiceResultDataSet.three(),
                 DiceResultDataSet.four(),
                 DiceResultDataSet.five(),
                 DiceResultDataSet.six()
-            )
+            ).fullHouse()
         );
     }
 
@@ -875,13 +880,13 @@ public class YatzyTest {
     public void givenTwoTwoFourFiveSixDicesResults_whenFullHouse_ThenReturnZero() throws UnconsistentDiceResult {
         assertEquals(
             0,
-            Yatzy.fullHouse(
+            this.initializeYatzyGame(
                 DiceResultDataSet.two(),
                 DiceResultDataSet.two(),
                 DiceResultDataSet.four(),
                 DiceResultDataSet.five(),
                 DiceResultDataSet.six()
-            )
+            ).fullHouse()
         );
     }
 
@@ -895,13 +900,13 @@ public class YatzyTest {
     public void givenTwoTwoTwoFiveSixDicesResults_whenFullHouse_ThenReturnZero() throws UnconsistentDiceResult {
         assertEquals(
             0,
-            Yatzy.fullHouse(
+            this.initializeYatzyGame(
                 DiceResultDataSet.two(),
                 DiceResultDataSet.two(),
                 DiceResultDataSet.two(),
                 DiceResultDataSet.five(),
                 DiceResultDataSet.six()
-            )
+            ).fullHouse()
         );
     }
 }

@@ -3,13 +3,14 @@ package score.severalOfAKind;
 import dice.DiceResult;
 import score.AbstractScore;
 
+import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
 abstract class SeveralOfAKindScore extends AbstractScore {
     private final int numberOfAKind;
 
-    public SeveralOfAKindScore(DiceResult firstDiceResult, DiceResult secondDiceResult, DiceResult thirdDiceResult, DiceResult fourthDiceResult, DiceResult fifthDiceResult, int numberOfAKind) {
-        super(firstDiceResult, secondDiceResult, thirdDiceResult, fourthDiceResult, fifthDiceResult);
+    public SeveralOfAKindScore(int numberOfAKind) {
+        super();
         this.numberOfAKind = numberOfAKind;
     }
 
@@ -18,10 +19,10 @@ abstract class SeveralOfAKindScore extends AbstractScore {
      * @return the diceFace times the numberOfAKind (for each detected occurences)
      */
     @Override
-    public int calculateScore() {
+    public int calculateScore(List<DiceResult> diceResults) {
         AtomicInteger score = new AtomicInteger();
-        this.diceResults.stream().mapToInt(DiceResult::getResult).distinct().forEach(diceFace -> {
-            if(this.diceResults.stream().filter(currentDiceResult -> currentDiceResult.getResult() == diceFace).count() >= this.numberOfAKind){
+        diceResults.stream().mapToInt(DiceResult::getResult).distinct().forEach(diceFace -> {
+            if(diceResults.stream().filter(currentDiceResult -> currentDiceResult.getResult() == diceFace).count() >= this.numberOfAKind){
                 score.addAndGet(diceFace * numberOfAKind);
             }
         });

@@ -1,12 +1,16 @@
 package score.severalOfAKind;
 
+import dice.DiceResult;
 import dice.exceptions.UnconsistentDiceResult;
 import org.junit.Test;
+import score.AbstractScoreTest;
 import utils.DiceResultDataSet;
+
+import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 
-public class PairScoreTest {
+public class PairScoreTest extends AbstractScoreTest {
     /**
      * Given 3, 4, 3, 5, 6 dices results
      * When calculating pair result
@@ -15,14 +19,15 @@ public class PairScoreTest {
      */
     @Test
     public void givenThreeFourThreeFiveSixDicesResults_whenCalculatePairScore_ThenReturnSix() throws UnconsistentDiceResult {
-        PairScore actualPairScore = new PairScore(
+        List<DiceResult> diceResults = this.initializeDicesResults(
             DiceResultDataSet.three(),
             DiceResultDataSet.four(),
             DiceResultDataSet.three(),
             DiceResultDataSet.five(),
             DiceResultDataSet.six()
         );
-        assertEquals(6, actualPairScore.calculateScore());
+
+        assertEquals(6, PairScore.getInstance().calculateScore(diceResults));
     }
 
     /**
@@ -33,14 +38,15 @@ public class PairScoreTest {
      */
     @Test
     public void givenFiveThreeThreeThreeFiveDicesResults_whenCalculatePairScore_ThenReturnTen() throws UnconsistentDiceResult {
-        PairScore actualPairScore = new PairScore(
+        List<DiceResult> diceResults = this.initializeDicesResults(
             DiceResultDataSet.five(),
             DiceResultDataSet.three(),
             DiceResultDataSet.three(),
             DiceResultDataSet.three(),
             DiceResultDataSet.five()
         );
-        assertEquals(10, actualPairScore.calculateScore());
+
+        assertEquals(10, PairScore.getInstance().calculateScore(diceResults));
     }
 
     /**
@@ -51,13 +57,14 @@ public class PairScoreTest {
      */
     @Test
     public void givenFiveThreeSixSixFiveDicesResults_whenCalculatePairScore_ThenReturnTwelve() throws UnconsistentDiceResult {
-        PairScore actualPairScore = new PairScore(
+        List<DiceResult> diceResults = this.initializeDicesResults(
             DiceResultDataSet.five(),
             DiceResultDataSet.three(),
             DiceResultDataSet.six(),
             DiceResultDataSet.six(),
             DiceResultDataSet.five()
         );
-        assertEquals(12, actualPairScore.calculateScore());
+
+        assertEquals(12, PairScore.getInstance().calculateScore(diceResults));
     }
 }

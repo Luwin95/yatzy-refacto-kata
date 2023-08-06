@@ -1,12 +1,15 @@
 package score;
 
+import dice.DiceResult;
 import dice.exceptions.UnconsistentDiceResult;
 import org.junit.Test;
 import utils.DiceResultDataSet;
 
+import java.util.List;
+
 import static org.junit.Assert.assertEquals;
 
-public class FullHouseScoreTest {
+public class FullHouseScoreTest extends AbstractScoreTest {
     /**
      * Given 6, 2, 2, 2, 6 dices results
      * When calculating full house result
@@ -15,7 +18,7 @@ public class FullHouseScoreTest {
      */
     @Test
     public void givenSixTwoTwoTwoSixDicesResults_whenCalculateFullHouseScore_ThenReturnEighteen() throws UnconsistentDiceResult {
-        FullHouseScore actualFullHouseScore = new FullHouseScore(
+        List<DiceResult> diceResults = this.initializeDicesResults(
             DiceResultDataSet.six(),
             DiceResultDataSet.two(),
             DiceResultDataSet.two(),
@@ -23,7 +26,7 @@ public class FullHouseScoreTest {
             DiceResultDataSet.six()
         );
 
-        assertEquals(18, actualFullHouseScore.calculateScore());
+        assertEquals(18, FullHouseScore.getInstance().calculateScore(diceResults));
     }
 
     /**
@@ -34,7 +37,7 @@ public class FullHouseScoreTest {
      */
     @Test
     public void givenTwoThreeFourFiveSixDicesResults_whenCalculateFullHouseScore_ThenReturnZero() throws UnconsistentDiceResult {
-        FullHouseScore actualFullHouseScore = new FullHouseScore(
+        List<DiceResult> diceResults = this.initializeDicesResults(
             DiceResultDataSet.two(),
             DiceResultDataSet.three(),
             DiceResultDataSet.four(),
@@ -42,7 +45,7 @@ public class FullHouseScoreTest {
             DiceResultDataSet.six()
         );
 
-        assertEquals(0, actualFullHouseScore.calculateScore());
+        assertEquals(0, FullHouseScore.getInstance().calculateScore(diceResults));
     }
 
     /**
@@ -53,7 +56,7 @@ public class FullHouseScoreTest {
      */
     @Test
     public void givenTwoTwoFourFiveSixDicesResults_whenCalculateFullHouseScore_ThenReturnZero() throws UnconsistentDiceResult {
-        FullHouseScore actualFullHouseScore = new FullHouseScore(
+        List<DiceResult> diceResults = this.initializeDicesResults(
             DiceResultDataSet.two(),
             DiceResultDataSet.two(),
             DiceResultDataSet.four(),
@@ -61,7 +64,7 @@ public class FullHouseScoreTest {
             DiceResultDataSet.six()
         );
 
-        assertEquals(0, actualFullHouseScore.calculateScore());
+        assertEquals(0, FullHouseScore.getInstance().calculateScore(diceResults));
     }
 
     /**
@@ -72,7 +75,7 @@ public class FullHouseScoreTest {
      */
     @Test
     public void givenTwoTwoTwoFiveSixDicesResults_whenCalculateFullHouseScore_ThenReturnZero() throws UnconsistentDiceResult {
-        FullHouseScore actualFullHouseScore = new FullHouseScore(
+        List<DiceResult> diceResults = this.initializeDicesResults(
             DiceResultDataSet.two(),
             DiceResultDataSet.two(),
             DiceResultDataSet.two(),
@@ -80,6 +83,6 @@ public class FullHouseScoreTest {
             DiceResultDataSet.six()
         );
 
-        assertEquals(0, actualFullHouseScore.calculateScore());
+        assertEquals(0, FullHouseScore.getInstance().calculateScore(diceResults));
     }
 }

@@ -5,7 +5,13 @@ import dice.DiceResult;
 public class TwoPairsScore extends SeveralOfAKindScore{
     private static final int NUMBER_OF_A_KIND_PAIR = 2;
 
-    public TwoPairsScore(DiceResult firstDiceResult, DiceResult secondDiceResult, DiceResult thirdDiceResult, DiceResult fourthDiceResult, DiceResult fifthDiceResult) {
-        super(firstDiceResult, secondDiceResult, thirdDiceResult, fourthDiceResult, fifthDiceResult, NUMBER_OF_A_KIND_PAIR);
+    private static final TwoPairsScore instance = new TwoPairsScore();
+
+    public static TwoPairsScore getInstance(){
+        return instance;
+    }
+
+    private TwoPairsScore() {
+        super(NUMBER_OF_A_KIND_PAIR);
     }
 }

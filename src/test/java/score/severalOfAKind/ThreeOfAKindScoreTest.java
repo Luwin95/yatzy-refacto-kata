@@ -1,12 +1,16 @@
 package score.severalOfAKind;
 
+import dice.DiceResult;
 import dice.exceptions.UnconsistentDiceResult;
 import org.junit.Test;
+import score.AbstractScoreTest;
 import utils.DiceResultDataSet;
+
+import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 
-public class ThreeOfAKindScoreTest {
+public class ThreeOfAKindScoreTest extends AbstractScoreTest {
     /**
      * Given 3, 3, 3, 4, 5 dices results
      * When calculating three of a kind result
@@ -15,14 +19,15 @@ public class ThreeOfAKindScoreTest {
      */
     @Test
     public void givenThreeThreeThreeFourFiveDicesResults_whenCalculateThreeOfAKindScore_ThenReturnNine() throws UnconsistentDiceResult {
-        ThreeOfAKindScore actualThreeOfAKindScore = new ThreeOfAKindScore(
+        List<DiceResult> diceResults = this.initializeDicesResults(
             DiceResultDataSet.three(),
             DiceResultDataSet.three(),
             DiceResultDataSet.three(),
             DiceResultDataSet.four(),
             DiceResultDataSet.five()
         );
-        assertEquals(9, actualThreeOfAKindScore.calculateScore());
+
+        assertEquals(9, ThreeOfAKindScore.getInstance().calculateScore(diceResults));
     }
 
     /**
@@ -33,14 +38,15 @@ public class ThreeOfAKindScoreTest {
      */
     @Test
     public void givenFiveThreeFiveFourFiveDicesResults_whenCalculateThreeOfAKindScore_ThenReturnFifteen() throws UnconsistentDiceResult {
-        ThreeOfAKindScore actualThreeOfAKindScore = new ThreeOfAKindScore(
+        List<DiceResult> diceResults = this.initializeDicesResults(
             DiceResultDataSet.five(),
             DiceResultDataSet.three(),
             DiceResultDataSet.five(),
             DiceResultDataSet.four(),
             DiceResultDataSet.five()
         );
-        assertEquals(15, actualThreeOfAKindScore.calculateScore());
+
+        assertEquals(15, ThreeOfAKindScore.getInstance().calculateScore(diceResults));
     }
 
     /**
@@ -51,13 +57,14 @@ public class ThreeOfAKindScoreTest {
      */
     @Test
     public void givenThreeThreeThreeThreeFiveDicesResults_whenCalculateThreeOfAKindScore_ThenReturnNine() throws UnconsistentDiceResult {
-        ThreeOfAKindScore actualThreeOfAKindScore = new ThreeOfAKindScore(
+        List<DiceResult> diceResults = this.initializeDicesResults(
             DiceResultDataSet.three(),
             DiceResultDataSet.three(),
             DiceResultDataSet.three(),
             DiceResultDataSet.three(),
             DiceResultDataSet.five()
         );
-        assertEquals(9, actualThreeOfAKindScore.calculateScore());
+
+        assertEquals(9, ThreeOfAKindScore.getInstance().calculateScore(diceResults));
     }
 }

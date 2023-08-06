@@ -2,23 +2,28 @@ package score;
 
 import dice.DiceResult;
 
+import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class FullHouseScore extends AbstractScore{
 
-    public FullHouseScore(DiceResult firstDiceResult, DiceResult secondDiceResult, DiceResult thirdDiceResult, DiceResult fourthDiceResult, DiceResult fifthDiceResult) {
-        super(firstDiceResult, secondDiceResult, thirdDiceResult, fourthDiceResult, fifthDiceResult);
+    private static final FullHouseScore instance = new FullHouseScore();
+
+    public static FullHouseScore getInstance(){
+        return instance;
     }
 
+    private FullHouseScore(){}
+
     @Override
-    public int calculateScore() {
+    public int calculateScore(List<DiceResult> diceResults) {
         AtomicInteger pairScore = new AtomicInteger();
         AtomicInteger threeOfAKindScore = new AtomicInteger();
-        this.diceResults.stream().mapToInt(DiceResult::getResult).distinct().forEach(diceFace -> {
-            if(this.diceResults.stream().filter(currentDiceResult -> currentDiceResult.getResult() == diceFace).count() == 2){
+        diceResults.stream().mapToInt(DiceResult::getResult).distinct().forEach(diceFace -> {
+            if(diceResults.stream().filter(currentDiceResult -> currentDiceResult.getResult() == diceFace).count() == 2){
                 pairScore.set(diceFace * 2);
             }
-            if(this.diceResults.stream().filter(currentDiceResult -> currentDiceResult.getResult() == diceFace).count() == 3){
+            if(diceResults.stream().filter(currentDiceResult -> currentDiceResult.getResult() == diceFace).count() == 3){
                 threeOfAKindScore.set(diceFace * 3);
             }
         });

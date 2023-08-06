@@ -1,12 +1,16 @@
 package score.face;
 
+import dice.DiceResult;
 import dice.exceptions.UnconsistentDiceResult;
 import org.junit.Test;
+import score.AbstractScoreTest;
 import utils.DiceResultDataSet;
+
+import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 
-public class OnesScoreTest {
+public class OnesScoreTest extends AbstractScoreTest {
     /**
      * Given 1, 2, 3, 4, 5 dices results
      * When calculating ones result
@@ -15,7 +19,7 @@ public class OnesScoreTest {
      */
     @Test
     public void givenOneTwoThreeFourFiveDicesResults_whenCalculateOnesScore_ThenReturnOne() throws UnconsistentDiceResult {
-        OnesScore actualOnesScore = new OnesScore(
+        List<DiceResult> diceResults = this.initializeDicesResults(
             DiceResultDataSet.one(),
             DiceResultDataSet.two(),
             DiceResultDataSet.three(),
@@ -23,7 +27,7 @@ public class OnesScoreTest {
             DiceResultDataSet.five()
         );
 
-        assertEquals(1, actualOnesScore.calculateScore());
+        assertEquals(1, OnesScore.getInstance().calculateScore(diceResults));
     }
 
     /**
@@ -34,7 +38,7 @@ public class OnesScoreTest {
      */
     @Test
     public void givenOneTwoOneFourFiveDicesResults_whenCalculateOnesScore_ThenReturnTwo() throws UnconsistentDiceResult {
-        OnesScore actualOnesScore = new OnesScore(
+        List<DiceResult> diceResults = this.initializeDicesResults(
             DiceResultDataSet.one(),
             DiceResultDataSet.two(),
             DiceResultDataSet.one(),
@@ -42,7 +46,7 @@ public class OnesScoreTest {
             DiceResultDataSet.five()
         );
 
-        assertEquals(2, actualOnesScore.calculateScore());
+        assertEquals(2, OnesScore.getInstance().calculateScore(diceResults));
     }
 
     /**
@@ -53,7 +57,7 @@ public class OnesScoreTest {
      */
     @Test
     public void givenSixTwoTwoFourFiveDicesResults_whenCalculateOnesScore_ThenReturnZero() throws UnconsistentDiceResult {
-        OnesScore actualOnesScore = new OnesScore(
+        List<DiceResult> diceResults = this.initializeDicesResults(
             DiceResultDataSet.six(),
             DiceResultDataSet.two(),
             DiceResultDataSet.two(),
@@ -61,7 +65,7 @@ public class OnesScoreTest {
             DiceResultDataSet.five()
         );
 
-        assertEquals(0, actualOnesScore.calculateScore());
+        assertEquals(0, OnesScore.getInstance().calculateScore(diceResults));
     }
 
     /**
@@ -72,7 +76,7 @@ public class OnesScoreTest {
      */
     @Test
     public void givenOneTwoOneOneOneDicesResults_whenCalculateOnesScore_ThenReturnFour() throws UnconsistentDiceResult {
-        OnesScore actualOnesScore = new OnesScore(
+        List<DiceResult> diceResults = this.initializeDicesResults(
             DiceResultDataSet.one(),
             DiceResultDataSet.two(),
             DiceResultDataSet.one(),
@@ -80,6 +84,6 @@ public class OnesScoreTest {
             DiceResultDataSet.one()
         );
 
-        assertEquals(4, actualOnesScore.calculateScore());
+        assertEquals(4, OnesScore.getInstance().calculateScore(diceResults));
     }
 }

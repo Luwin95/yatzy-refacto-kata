@@ -1,12 +1,16 @@
 package score.face;
 
+import dice.DiceResult;
 import dice.exceptions.UnconsistentDiceResult;
 import org.junit.Test;
+import score.AbstractScoreTest;
 import utils.DiceResultDataSet;
+
+import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 
-public class FoursScoreTest {
+public class FoursScoreTest extends AbstractScoreTest {
     /**
      * Given 4, 4, 4, 5, 5 dices results
      * When calculating fours result
@@ -15,7 +19,7 @@ public class FoursScoreTest {
      */
     @Test
     public void givenFourFourFourFiveFiveDicesResults_whenCalculateFoursScore_ThenReturnTwelve() throws UnconsistentDiceResult {
-        FoursScore actualFoursScore = new FoursScore(
+        List<DiceResult> diceResults = this.initializeDicesResults(
             DiceResultDataSet.four(),
             DiceResultDataSet.four(),
             DiceResultDataSet.four(),
@@ -23,7 +27,8 @@ public class FoursScoreTest {
             DiceResultDataSet.five()
         );
 
-        assertEquals(12, actualFoursScore.calculateScore());
+
+        assertEquals(12, FoursScore.getInstance().calculateScore(diceResults));
     }
 
     /**
@@ -34,7 +39,7 @@ public class FoursScoreTest {
      */
     @Test
     public void givenFourFourFiveFiveFiveDicesResults_whenCalculateFoursScore_ThenReturnEight() throws UnconsistentDiceResult {
-        FoursScore actualFoursScore = new FoursScore(
+        List<DiceResult> diceResults = this.initializeDicesResults(
             DiceResultDataSet.four(),
             DiceResultDataSet.four(),
             DiceResultDataSet.five(),
@@ -42,7 +47,7 @@ public class FoursScoreTest {
             DiceResultDataSet.five()
         );
 
-        assertEquals(8, actualFoursScore.calculateScore());
+        assertEquals(8, FoursScore.getInstance().calculateScore(diceResults));
     }
 
     /**
@@ -53,7 +58,7 @@ public class FoursScoreTest {
      */
     @Test
     public void givenFourFiveFiveFiveFiveDicesResults_whenCalculateFoursScore_ThenReturnFour() throws UnconsistentDiceResult {
-        FoursScore actualFoursScore = new FoursScore(
+        List<DiceResult> diceResults = this.initializeDicesResults(
             DiceResultDataSet.four(),
             DiceResultDataSet.five(),
             DiceResultDataSet.five(),
@@ -61,6 +66,6 @@ public class FoursScoreTest {
             DiceResultDataSet.five()
         );
 
-        assertEquals(4, actualFoursScore.calculateScore());
+        assertEquals(4, FoursScore.getInstance().calculateScore(diceResults));
     }
 }

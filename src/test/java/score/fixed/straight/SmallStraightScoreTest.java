@@ -1,12 +1,16 @@
 package score.fixed.straight;
 
+import dice.DiceResult;
 import dice.exceptions.UnconsistentDiceResult;
 import org.junit.Test;
+import score.AbstractScoreTest;
 import utils.DiceResultDataSet;
+
+import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 
-public class SmallStraightScoreTest {
+public class SmallStraightScoreTest extends AbstractScoreTest {
     /**
      * Given 1, 2, 3, 4, 5 dices results
      * When calculating small straight result
@@ -15,7 +19,7 @@ public class SmallStraightScoreTest {
      */
     @Test
     public void givenOneTwoThreeFourFiveDicesResults_whenCalculateSmallStraightScore_ThenReturnFifteen() throws UnconsistentDiceResult {
-        SmallStraightScore smallStraightScore = new SmallStraightScore(
+        List<DiceResult> diceResults = this.initializeDicesResults(
             DiceResultDataSet.one(),
             DiceResultDataSet.two(),
             DiceResultDataSet.three(),
@@ -23,7 +27,7 @@ public class SmallStraightScoreTest {
             DiceResultDataSet.five()
         );
 
-        assertEquals(15, smallStraightScore.calculateScore());
+        assertEquals(15, SmallStraightScore.getInstance().calculateScore(diceResults));
     }
 
     /**
@@ -34,7 +38,7 @@ public class SmallStraightScoreTest {
      */
     @Test
     public void givenTwoThreeFourFiveOneDicesResults_whenCalculateSmallStraightScore_ThenReturnFifteen() throws UnconsistentDiceResult {
-        SmallStraightScore smallStraightScore = new SmallStraightScore(
+        List<DiceResult> diceResults = this.initializeDicesResults(
             DiceResultDataSet.two(),
             DiceResultDataSet.three(),
             DiceResultDataSet.four(),
@@ -42,7 +46,7 @@ public class SmallStraightScoreTest {
             DiceResultDataSet.one()
         );
 
-        assertEquals(15, smallStraightScore.calculateScore());
+        assertEquals(15, SmallStraightScore.getInstance().calculateScore(diceResults));
     }
 
     /**
@@ -53,7 +57,7 @@ public class SmallStraightScoreTest {
      */
     @Test
     public void givenOneTwoTwoFourFiveDicesResults_whenCalculateSmallStraightScore_ThenReturnZero() throws UnconsistentDiceResult {
-        SmallStraightScore smallStraightScore = new SmallStraightScore(
+        List<DiceResult> diceResults = this.initializeDicesResults(
             DiceResultDataSet.one(),
             DiceResultDataSet.two(),
             DiceResultDataSet.two(),
@@ -61,6 +65,6 @@ public class SmallStraightScoreTest {
             DiceResultDataSet.five()
         );
 
-        assertEquals(0, smallStraightScore.calculateScore());
+        assertEquals(0, SmallStraightScore.getInstance().calculateScore(diceResults));
     }
 }

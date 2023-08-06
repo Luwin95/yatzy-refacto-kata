@@ -1,12 +1,16 @@
 package score.face;
 
+import dice.DiceResult;
 import dice.exceptions.UnconsistentDiceResult;
 import org.junit.Test;
+import score.AbstractScoreTest;
 import utils.DiceResultDataSet;
+
+import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 
-public class ThreesScoreTest {
+public class ThreesScoreTest extends AbstractScoreTest {
     /**
      * Given 1, 2, 3, 2, 3 dices results
      * When calculating threes result
@@ -15,7 +19,7 @@ public class ThreesScoreTest {
      */
     @Test
     public void givenOneTwoThreeTwoThreeDicesResults_whenCalculateThreesScore_ThenReturnSix() throws UnconsistentDiceResult {
-        ThreesScore actualThreesScore = new ThreesScore(
+        List<DiceResult> diceResults = this.initializeDicesResults(
             DiceResultDataSet.one(),
             DiceResultDataSet.two(),
             DiceResultDataSet.three(),
@@ -23,7 +27,7 @@ public class ThreesScoreTest {
             DiceResultDataSet.three()
         );
 
-        assertEquals(6, actualThreesScore.calculateScore());
+        assertEquals(6, ThreesScore.getInstance().calculateScore(diceResults));
     }
 
     /**
@@ -34,7 +38,7 @@ public class ThreesScoreTest {
      */
     @Test
     public void givenTwoThreeThreeThreeThreeDicesResults_whenCalculateThreesScore_ThenReturnTwelve() throws UnconsistentDiceResult {
-        ThreesScore actualThreesScore = new ThreesScore(
+        List<DiceResult> diceResults = this.initializeDicesResults(
             DiceResultDataSet.two(),
             DiceResultDataSet.three(),
             DiceResultDataSet.three(),
@@ -42,6 +46,6 @@ public class ThreesScoreTest {
             DiceResultDataSet.three()
         );
 
-        assertEquals(12, actualThreesScore.calculateScore());
+        assertEquals(12, ThreesScore.getInstance().calculateScore(diceResults));
     }
 }
